@@ -1,0 +1,86 @@
+{
+   "linkml": "https://w3id.org/linkml/",
+   "ncit": "http://purl.obolibrary.org/obo/NCIT_",
+   "qudt": "http://qudt.org/schema/qudt/",
+   "schema": "http://schema.org/",
+   "si-unit": "http://qudt.org/vocab/unit/",
+   "sosa": "http://www.w3.org/ns/sosa/",
+   "Beamline": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/Beamline"
+   },
+   "BeamlineElement": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement"
+   },
+   "BendParams": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/BendParams"
+   },
+   "Capability": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/Capability"
+   },
+   "CapabilityLayer": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/CapabilityLayer"
+   },
+   "CapabilityProfile": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile"
+   },
+   "ControlProfileFamily": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily"
+   },
+   "DeviceTypeSignalSet": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet"
+   },
+   "ElementNaradRef": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/ElementNaradRef"
+   },
+   "ElementSemantics": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics"
+   },
+   "Facility": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/Facility"
+   },
+   "GraphProjection": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/GraphProjection"
+   },
+   "JLabParams": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/JLabParams"
+   },
+   "KeyValuePair": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/KeyValuePair"
+   },
+   "MagneticMultipoleParams": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleParams"
+   },
+   "NaradConfig": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/NaradConfig"
+   },
+   "NaradModel": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/NaradModel"
+   },
+   "NodeLabels": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/NodeLabels"
+   },
+   "PVBinding": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/PVBinding"
+   },
+   "RFParams": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/RFParams"
+   },
+   "Signal": {
+      "@id": "sosa:ObservableProperty"
+   },
+   "SignalBinding": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding"
+   },
+   "SignalDefinitions": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/SignalDefinitions"
+   },
+   "SignalLayer": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/SignalLayer"
+   },
+   "SolenoidParams": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/SolenoidParams"
+   },
+   "TypeSpecificCapability": {
+      "@id": "https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability"
+   }
+}

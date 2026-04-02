@@ -1,0 +1,1503 @@
+{
+    "$defs": {
+        "Beamline": {
+            "additionalProperties": false,
+            "description": "An ordered sequence of beamline elements defining a beam path.",
+            "properties": {
+                "kind": {
+                    "description": "Kind/type of the profile family or profile instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "line": {
+                    "description": "Ordered sequence of cross-referenced element names forming a beamline.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "Beamline",
+            "type": "object"
+        },
+        "BeamlineElement": {
+            "additionalProperties": false,
+            "description": "A single element in a beamline with optional physics parameter blocks.",
+            "properties": {
+                "BendP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BendParams"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Dipole/bend physics parameters block."
+                },
+                "JLabP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/JLabParams"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "JLab-specific element parameters block."
+                },
+                "MagneticMultipoleP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MagneticMultipoleParams"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Magnetic multipole physics parameters block."
+                },
+                "RFP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RFParams"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "RF cavity physics parameters block."
+                },
+                "SolenoidP": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SolenoidParams"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Solenoid physics parameters block."
+                },
+                "kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind/type of the profile family or profile instance."
+                },
+                "length": {
+                    "description": "Physical length of the element in meters.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "narad": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElementNaradRef"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "BeamlineElement",
+            "type": "object"
+        },
+        "BendParams": {
+            "additionalProperties": false,
+            "description": "Dipole/bend physics parameters (entry angle, exit edge angles).",
+            "properties": {
+                "angle_ref": {
+                    "description": "Reference bend angle in radians.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "e1": {
+                    "description": "Entry edge angle in radians.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "e2": {
+                    "description": "Exit edge angle in radians.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "BendParams",
+            "type": "object"
+        },
+        "Capability": {
+            "additionalProperties": false,
+            "description": "A grouping of related signals for a control aspect.",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "signals": {
+                    "description": "Signals within a capability.",
+                    "items": {
+                        "$ref": "#/$defs/Signal"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "Capability",
+            "type": "object"
+        },
+        "CapabilityLayer": {
+            "additionalProperties": false,
+            "description": "Capability-layer container for profile families.",
+            "properties": {
+                "profiles": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/ControlProfileFamily__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Control profile families keyed by family name.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CapabilityLayer",
+            "type": "object"
+        },
+        "CapabilityProfile": {
+            "additionalProperties": false,
+            "description": "A device-type profile that reuses shared capabilities and adds specific capabilities.",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inherits_shared_capabilities": {
+                    "description": "Names of shared capabilities inherited by the profile.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "Kind/type of the profile family or profile instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "type_specific_capabilities": {
+                    "description": "Type-specific capabilities declared directly in a profile, each with an id, class label, description, and signals.",
+                    "items": {
+                        "$ref": "#/$defs/TypeSpecificCapability"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "CapabilityProfile",
+            "type": "object"
+        },
+        "CapabilityProfile__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A device-type profile that reuses shared capabilities and adds specific capabilities.",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "inherits_shared_capabilities": {
+                    "description": "Names of shared capabilities inherited by the profile.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "Kind/type of the profile family or profile instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "type_specific_capabilities": {
+                    "description": "Type-specific capabilities declared directly in a profile, each with an id, class label, description, and signals.",
+                    "items": {
+                        "$ref": "#/$defs/TypeSpecificCapability"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [],
+            "title": "CapabilityProfile",
+            "type": "object"
+        },
+        "Capability__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A grouping of related signals for a control aspect.",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "signals": {
+                    "description": "Signals within a capability.",
+                    "items": {
+                        "$ref": "#/$defs/Signal"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [],
+            "title": "Capability",
+            "type": "object"
+        },
+        "ControlProfileFamily": {
+            "additionalProperties": false,
+            "description": "A reusable family of control profiles sharing common semantics and structure.",
+            "properties": {
+                "cavity_type_profiles": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/CapabilityProfile__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "RF cavity profile definitions keyed by profile name.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "graph_projection": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/GraphProjection"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Optional graph projection metadata attached to a profile family."
+                },
+                "instrument_type_profiles": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/CapabilityProfile__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Instrument profile definitions keyed by profile name.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "Kind/type of the profile family or profile instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "magnet_type_profiles": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/CapabilityProfile__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Magnet profile definitions keyed by profile name.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "shared_capabilities": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Capability__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Named shared capabilities reused by profile types in a family.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "ControlProfileFamily",
+            "type": "object"
+        },
+        "ControlProfileFamily__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A reusable family of control profiles sharing common semantics and structure.",
+            "properties": {
+                "cavity_type_profiles": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/CapabilityProfile__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "RF cavity profile definitions keyed by profile name.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "graph_projection": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/GraphProjection"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Optional graph projection metadata attached to a profile family."
+                },
+                "instrument_type_profiles": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/CapabilityProfile__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Instrument profile definitions keyed by profile name.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "kind": {
+                    "description": "Kind/type of the profile family or profile instance.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "magnet_type_profiles": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/CapabilityProfile__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Magnet profile definitions keyed by profile name.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "shared_capabilities": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Capability__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Named shared capabilities reused by profile types in a family.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "required": [],
+            "title": "ControlProfileFamily",
+            "type": "object"
+        },
+        "DataTypeEnum": {
+            "description": "Allowed data types for signal values.",
+            "enum": [
+                "None",
+                "int",
+                "float",
+                "double",
+                "string",
+                "boolean",
+                "boolean_non_null",
+                "date",
+                "coded_value"
+            ],
+            "title": "DataTypeEnum",
+            "type": "string"
+        },
+        "DeviceTypeSignalSet": {
+            "additionalProperties": false,
+            "description": "Signal binding set scoped to a device type (for example, Quadrupole or BPM).",
+            "properties": {
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "signal_bindings": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalBinding__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Signal definitions keyed by signal name within a device type.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "DeviceTypeSignalSet",
+            "type": "object"
+        },
+        "DeviceTypeSignalSet__identifier_optional": {
+            "additionalProperties": false,
+            "description": "Signal binding set scoped to a device type (for example, Quadrupole or BPM).",
+            "properties": {
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "signal_bindings": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalBinding__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Signal definitions keyed by signal name within a device type.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "required": [],
+            "title": "DeviceTypeSignalSet",
+            "type": "object"
+        },
+        "ElementKindEnum": {
+            "description": "Controlled vocabulary for beamline element types.",
+            "enum": [
+                "Drift",
+                "Marker",
+                "BPM",
+                "Corrector",
+                "Dipole",
+                "Quadrupole",
+                "Solenoid",
+                "RFCavity",
+                "Instrument"
+            ],
+            "title": "ElementKindEnum",
+            "type": "string"
+        },
+        "ElementNaradRef": {
+            "additionalProperties": false,
+            "description": "NARAD semantic reference block attached to a beamline element.",
+            "properties": {
+                "capability_profile": {
+                    "description": "Cross-reference to the specific capability profile applied to this element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "capability_profile_family": {
+                    "description": "Cross-reference to the control profile family for this element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "cavity_semantics": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElementSemantics"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "RF-cavity-domain semantic context for this element."
+                },
+                "instrument_semantics": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElementSemantics"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Instrument-domain semantic context for this element."
+                },
+                "magnet_semantics": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ElementSemantics"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Magnet-domain semantic context for this element."
+                },
+                "signal_bindings": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/PVBinding__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Signal definitions keyed by signal name within a device type.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ElementNaradRef",
+            "type": "object"
+        },
+        "ElementSemantics": {
+            "additionalProperties": false,
+            "description": "Semantic context referencing shared and type-specific capability names for a beamline element.",
+            "properties": {
+                "shared_capabilities": {
+                    "description": "Names of shared capabilities applied to this element, referencing Capability by name.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "type_specific_capabilities": {
+                    "description": "Capability class labels (e.g. CorrectorKickCapability) identifying which type-specific capabilities apply to this element. These match the capability_class field of TypeSpecificCapability entries in the profile.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ElementSemantics",
+            "type": "object"
+        },
+        "Facility": {
+            "additionalProperties": false,
+            "description": "A facility with specific signal bindings.",
+            "properties": {
+                "control_system": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "naming_convention": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signal_definitions": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SignalDefinitions"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "Facility",
+            "type": "object"
+        },
+        "Facility__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A facility with specific signal bindings.",
+            "properties": {
+                "control_system": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "naming_convention": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signal_definitions": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SignalDefinitions"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [],
+            "title": "Facility",
+            "type": "object"
+        },
+        "GraphProjection": {
+            "additionalProperties": false,
+            "description": "Graph projection metadata for node labels and edge categories.",
+            "properties": {
+                "node_labels": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/NodeLabels"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Node label mapping for the graph projection."
+                },
+                "relationships": {
+                    "description": "Relationship labels used in graph projection.",
+                    "items": {
+                        "$ref": "#/$defs/RelationshipTypeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "GraphProjection",
+            "type": "object"
+        },
+        "JLabParams": {
+            "additionalProperties": false,
+            "description": "JLab-specific element parameters: type designation, accelerator model name, and open property map.",
+            "properties": {
+                "jlab_type": {
+                    "description": "JLab-specific element type designation (e.g. WarmCavity, QW, HCorrector). Serialized as 'type' in source YAML; renamed here to avoid conflict with the LinkML metamodel 'type' designator used for polymorphic class selection.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "modeled_as": {
+                    "description": "Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "properties": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/KeyValuePair__identifier_optional"
+                            },
+                            {
+                                "description": "Property value as a string.",
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Open-ended key-value property map for element-specific parameters.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "title": "JLabParams",
+            "type": "object"
+        },
+        "KeyValuePair": {
+            "additionalProperties": false,
+            "description": "A generic key-value pair for open-ended property maps.",
+            "properties": {
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Property value as a string.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "KeyValuePair",
+            "type": "object"
+        },
+        "KeyValuePair__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A generic key-value pair for open-ended property maps.",
+            "properties": {
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Property value as a string.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [],
+            "title": "KeyValuePair",
+            "type": "object"
+        },
+        "MagneticMultipoleParams": {
+            "additionalProperties": false,
+            "description": "Magnetic multipole physics parameters.",
+            "properties": {
+                "kn1": {
+                    "description": "First-order magnetic multipole coefficient (quadrupole strength).",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "MagneticMultipoleParams",
+            "type": "object"
+        },
+        "NaradConfig": {
+            "additionalProperties": false,
+            "description": "NARAD configuration block containing the capability layer.",
+            "properties": {
+                "capability_layer": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CapabilityLayer"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "control_system": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facility": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "intent": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "schema_version": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signal_layer": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SignalLayer"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Signal-layer container for facility-specific signal bindings."
+                }
+            },
+            "title": "NaradConfig",
+            "type": "object"
+        },
+        "NaradModel": {
+            "additionalProperties": false,
+            "description": "Top-level NARAD document container.",
+            "properties": {
+                "beamlines": {
+                    "description": "Ordered list of beamlines in this NARAD document.",
+                    "items": {
+                        "$ref": "#/$defs/Beamline"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "elements": {
+                    "description": "Beamline element definitions (referenced by name from beamline line sequences).",
+                    "items": {
+                        "$ref": "#/$defs/BeamlineElement"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "narad": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/NaradConfig"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "title": "NaradModel",
+            "type": "object"
+        },
+        "NodeLabels": {
+            "additionalProperties": false,
+            "description": "Labels used when projecting the profile model into a graph view.",
+            "properties": {
+                "capability": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "capability_family": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "device": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "profile": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signal": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "NodeLabels",
+            "type": "object"
+        },
+        "PVBinding": {
+            "additionalProperties": false,
+            "description": "A concrete PV (Process Variable) binding for one semantic signal on a beamline element.",
+            "properties": {
+                "control_system": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facility": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "pv": {
+                    "description": "The EPICS Process Variable name (e.g. MBHK101H.S).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "PVBinding",
+            "type": "object"
+        },
+        "PVBinding__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A concrete PV (Process Variable) binding for one semantic signal on a beamline element.",
+            "properties": {
+                "control_system": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facility": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "pv": {
+                    "description": "The EPICS Process Variable name (e.g. MBHK101H.S).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [],
+            "title": "PVBinding",
+            "type": "object"
+        },
+        "RFParams": {
+            "additionalProperties": false,
+            "description": "RF cavity physics parameters (frequency, voltage, phase).",
+            "properties": {
+                "frequency": {
+                    "description": "RF frequency in Hz.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "phase": {
+                    "description": "RF phase in degrees.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "voltage": {
+                    "description": "RF voltage in volts.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "RFParams",
+            "type": "object"
+        },
+        "RelationshipTypeEnum": {
+            "description": "Allowed edge labels in the profile-family graph projection.",
+            "enum": [
+                "HAS_SHARED_CAPABILITY",
+                "HAS_TYPE_PROFILE",
+                "INHERITS_CAPABILITY",
+                "HAS_TYPE_SPECIFIC_CAPABILITY",
+                "HAS_SIGNAL",
+                "IMPLEMENTED_BY",
+                "BINDS_TO",
+                "LOCATED_IN",
+                "CONTROLLED_BY"
+            ],
+            "title": "RelationshipTypeEnum",
+            "type": "string"
+        },
+        "Signal": {
+            "additionalProperties": false,
+            "description": "A named semantic signal used by a capability.",
+            "properties": {
+                "data_type": {
+                    "$ref": "#/$defs/DataTypeEnum",
+                    "description": "The data type of the signal's value."
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                },
+                "role": {
+                    "description": "The role of the signal in the control model.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "units": {
+                    "description": "Units of measurement or null for unitless values.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "Signal",
+            "type": "object"
+        },
+        "SignalBinding": {
+            "additionalProperties": false,
+            "description": "A named EPICS suffix definition for one semantic signal.",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "epics_suffix": {
+                    "description": "Facility-specific EPICS suffix for a semantic signal.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "SignalBinding",
+            "type": "object"
+        },
+        "SignalBinding__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A named EPICS suffix definition for one semantic signal.",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "epics_suffix": {
+                    "description": "Facility-specific EPICS suffix for a semantic signal.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name/identifier of the entity.",
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "SignalBinding",
+            "type": "object"
+        },
+        "SignalDefinitions": {
+            "additionalProperties": false,
+            "description": "Grouped EPICS signal suffix templates by semantic category.",
+            "properties": {
+                "cavity_signals": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalBinding__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Cavity signal definitions keyed by signal name.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "instrument_type_signals": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/DeviceTypeSignalSet__identifier_optional"
+                            },
+                            {
+                                "additionalProperties": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/$defs/SignalBinding__identifier_optional"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ]
+                                },
+                                "description": "Signal definitions keyed by signal name within a device type.",
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Instrument-type-specific signal definition groups keyed by device type.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "magnet_type_signals": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/DeviceTypeSignalSet__identifier_optional"
+                            },
+                            {
+                                "additionalProperties": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/$defs/SignalBinding__identifier_optional"
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ]
+                                },
+                                "description": "Signal definitions keyed by signal name within a device type.",
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Magnet-type-specific signal definition groups keyed by device type.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "shared_magnet_signals": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/SignalBinding__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Shared magnet signal definitions keyed by signal name.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SignalDefinitions",
+            "type": "object"
+        },
+        "SignalLayer": {
+            "additionalProperties": false,
+            "description": "Signal-layer container for facility-specific signal bindings.",
+            "properties": {
+                "facilities": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Facility__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Facility identifiers for facility-specific signal bindings.",
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SignalLayer",
+            "type": "object"
+        },
+        "SolenoidParams": {
+            "additionalProperties": false,
+            "description": "Solenoid physics parameters.",
+            "properties": {
+                "ksol": {
+                    "description": "Solenoid integrated field strength.",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SolenoidParams",
+            "type": "object"
+        },
+        "TypeSpecificCapability": {
+            "additionalProperties": false,
+            "description": "An inline capability declared within a device-type profile, with its own identifier, a semantic class label, a description, and a list of signals. Distinct from the shared capabilities referenced by name; these are profile-local definitions.",
+            "properties": {
+                "capability_class": {
+                    "description": "Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCapability). Serialized as 'class' in source YAML; renamed here to avoid conflict with reserved keywords.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Unique identifier for the entity.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "signals": {
+                    "description": "Signals within a capability.",
+                    "items": {
+                        "$ref": "#/$defs/Signal"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "TypeSpecificCapability",
+            "type": "object"
+        }
+    },
+    "$id": "https://w3id.org/narad_linkml/schema/narad/schema",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "Top-level NARAD document container.",
+    "metamodel_version": "1.7.0",
+    "properties": {
+        "beamlines": {
+            "description": "Ordered list of beamlines in this NARAD document.",
+            "items": {
+                "$ref": "#/$defs/Beamline"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "elements": {
+            "description": "Beamline element definitions (referenced by name from beamline line sequences).",
+            "items": {
+                "$ref": "#/$defs/BeamlineElement"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "narad": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/NaradConfig"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        }
+    },
+    "title": "narad",
+    "type": "object",
+    "version": "0.1.0"
+}

@@ -1,0 +1,193 @@
+---
+id: https://w3id.org/dmlinkml/tutorial/2025/schema
+name: linkml_tutorial_2025_dm
+description: >-
+  This is a data model for representing plant tissue samples, which are a specific type of sample that can be collected and analyzed in various scientific fields. The data model includes classes, enums, and slots that capture relevant information about plant tissue samples, such as their unique identifiers, names, descriptions, storage containers, plate locations, ploidy levels, and collection date and time. The model also includes mappings to external ontologies to enhance interoperability and integration with other datasets and ontologies in the domain of plant biology and related fields.
+license: CC-BY-4.0
+
+# now define the prefix mappings for the ontologies we are using in our imports and mappings. If the prefixes are not defined here and are used below,
+# then the system will not know how to resolve the CURIEs and will throw an error.
+prefixes:
+  linkml: "https://w3id.org/linkml/"
+  link_ml_tutorial_2025: "https://w3id.org/dmlinkml/tutorial/2025/schema/"
+  example: "https://w3id.org/dmlinkml/tutorial/2025/schema/example/"
+  ENVO: "http://purl.obolibrary.org/obo/ENVO_"
+  PO: "http://purl.obolibrary.org/obo/PO_"
+  NCBITaxon: "http://purl.obolibrary.org/obo/NCBITaxon_"
+  schema: "http://schema.org/"
+  NCIT: "http://purl.obolibrary.org/obo/NCIT_"
+  PATO: "http://purl.obolibrary.org/obo/PATO_"
+  SIO: "http://semanticscience.org/resource/SIO_"
+  obo: "http://purl.obolibrary.org/obo/"
+
+
+imports:
+  - linkml:types 
+
+classes:
+  Sample:
+    slots:
+      - id
+      - name
+      - description
+      - sample_container
+      - sample_size
+    description: >-
+      A sample is a portion, piece, or segment that is representative of a whole. It is often used in various fields such as science, statistics, and marketing to gather information or make inferences about a larger population or phenomenon. A sample can be collected, analyzed, and studied to draw conclusions or make predictions about the entire group it represents.
+    abstract: true
+
+  PlantTissueSample:
+    is_a: Sample
+    aliases:
+      - psample
+      - plant_sample
+      - plant_tissue_sample
+      - planttissue
+      - ptiss
+    broad_mappings:
+      - NCIT:C19697 # Used Ontology Lookup Service: https://www.ebi.ac.uk/ols4/ontologies/ncit/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FNCIT_C19697
+    # class_uri: NCIT:C19697 - would do this IF we had a single, unambiguous mapping to an external class. In this case, we have multiple mappings, so we use broad_mappings instead
+    description: >-
+      Plant tissue sample is a sample taken from a plant tissue, which is a group of cells that perform a specific function in the plant.
+    slots:
+      - tissue_type
+      - ploidy
+      - collection_date_time
+
+    
+enums:
+  SampleContainerEnum:
+    description: >-
+      An enumeration of different types of containers that can be used to store samples, such as vials, tubes, petri dishes, etc.
+    permissible_values:
+      vial:
+        description: A small container typically used to hold liquid samples.
+      tube:
+        description: >-
+          A cylindrical container often used for storing and transporting samples, especially in laboratory settings.
+      plate:
+        description: >-
+          A flat container with multiple wells or compartments, commonly used for culturing cells or conducting experiments 
+          in a laboratory.
+      SNOMED:409990004:
+        description: >-
+          Petri Dish from SNOMED CT ontology: A shallow, circular dish with a lid, typically used for culturing microorganisms 
+          or small plants in a laboratory setting.
+
+  NCBITaxonEnum:
+      reachable_from:
+        source_ontology: obo:ncbitaxon
+
+  TissueTypeEnum:
+      reachable_from:
+        source_ontology: obo:po
+        source_nodes:
+          - PO:0025131 # this indicates I want to import the subtree of the Plant Ontology rooted at PO:0025131, which is the term for "plant tissue"
+        include_self: false # this indicates I do NOT want to include the root node itself (PO:0025131) in the import, but only its children
+        relationship_types:
+          - rdfs:subClassOf # this indicates that I want to include all nodes that are connected to the root node (PO:0025131) via one or more rdfs:subClassOf relationships. In other words, I want to include all subclasses of "plant tissue" in the import.
+
+  # To Use the reachable_from use OAK (Ontology Access Kit) command line tool to generate the enum from the source ontology. For example, to generate the TissueTypeEnum from the Plant Ontology, you would run a command like this:
+  # pip install oaklib
+  #vskit expand -s my_schema.yaml -o my_schema_expanded.yaml
+  # MORE ABOUT THIS HERE: https://linkml.io/linkml/schemas/enums.html#tooling-to-support-dynamic-enums
+  #PloidyEnum:
+  #    reachable_from:
+  #      source_ontology: PATO:0001374 # this indicates that I want to import the subtree of the PATO ontology rooted at PATO:0001374, which is the term for "ploidy"
+  #      include_self: false # this indicates that I do NOT want to include the root node itself (the term for "ploidy") in the import, but only its children
+  #      relationship_types:
+  #        - rdfs:subClassOf # this indicates that I want to include all nodes that are connected to the root node (the term for "ploidy") via one or more rdfs:subClassOf relationships. In other words, I want to include all subclasses of "ploidy" in the import.
+
+  # Another way to do the PloidyEnum is to define it as a local enum and then map the individual values to the appropriate terms in the PATO ontology.
+  # This approach can be useful if you want to have more control over the specific values included in the enum or if you want to include additional values 
+  # and make it more human readable 
+  PloidyEnum:
+      description: >-
+        An enumeration of different ploidy levels, which refer to the number of sets of chromosomes present in the cells of an organism. 
+        Common ploidy levels include haploid (one set of chromosomes), diploid (two sets of chromosomes), triploid (three sets of chromosomes), etc.
+      permissible_values:
+        haploid:
+          description: A ploidy level where there is only one set of chromosomes present in the cells.
+          mappings:
+            - PATO:0001375 # this indicates that the "haploid" value in our PloidyEnum is mapped to the "haploid" term in PATO (PATO:0001375), which provides a standardized definition and context for the concept of haploid in the ontology. This mapping allows for better interoperability and integration with other ontologies and datasets that also use PATO for representing haploid information, ensuring that there is a clear and unambiguous correspondence between our "haploid" value and the concept of haploid as defined in PATO.
+        diploid:
+          description: A ploidy level where there are two sets of chromosomes present in the cells.
+          mappings:
+            - PATO:0001376
+        triploid:
+          description: A ploidy level where there are three sets of chromosomes present in the cells.
+          mappings:
+            - PATO:0001381
+        tetraploid:
+          description: A ploidy level where there are four sets of chromosomes present in the cells.
+          mappings:
+            - PATO:0001382
+        allapolyploid:
+          description: A ploidy level where there are multiple sets of chromosomes that are derived from different species, often as a result of hybridization events.
+          mappings:
+            - PATO:0001379
+
+
+slots:
+  id:
+    identifier: true
+    slot_uri: schema:identifier
+    range: uriorcurie
+    description: A unique identifier for a thing
+
+  name:
+    slot_uri: schema:name
+    description: A human-readable name for a thing
+
+  description:
+    slot_uri: schema:description
+    description: A human-readable description for a thing
+
+  sample_container:
+    required: true
+    range: SampleContainerEnum
+    description: The container in which the sample is stored, such as a vial, tube, plate, or petri dish.
+
+  plate_location:
+    range: string
+    description: >-
+      The location of the sample on a plate, if the sample is stored in a plate.
+      This could be represented as a combination of row and column identifiers (e.g., A1, B2, etc.) to indicate the specific well 
+      or compartment where the sample is located on the plate.
+    pattern: "^[A-H][1-9][0-2]?$" # this regex pattern allows for plate locations from A1 to H12, which is a common format for 96-well plates. It assumes rows are labeled A-H and columns are labeled 1-12.
+    
+  ploidy:
+    range: PloidyEnum
+    description: >-
+      The ploidy level of the genome sample, which refers to the number of sets of chromosomes present in the cells of the sample.
+      E.g., allopolyploid, haploid, diploid, triploid, etc. Ploidy is an important characteristic in genetics and can have implications for the biology and
+       behavior of the organism from which the sample was taken. 
+      Common ploidy levels include haploid (one set of chromosomes), diploid (two sets of chromosomes), triploid (three sets of chromosomes), etc.
+    slot_uri: PATO:0001374 # this indicates that the ploidy slot is mapped to the PATO term for "ploidy" (PATO:0001374), which provides a standardized definition and context for the concept of ploidy in the ontology. This mapping allows for better interoperability and integration with other ontologies and datasets that also use PATO for representing ploidy information.
+    exact_mappings:
+      - PATO:0001374 # this indicates that the ploidy slot is exactly mapped to the PATO term for "ploidy" (PATO:0001374), meaning that the concept of ploidy as represented in this schema is intended to be directly equivalent to the concept of ploidy as defined in PATO. This exact mapping allows for precise interoperability and integration with other ontologies and datasets that also use PATO for representing ploidy information, ensuring that there is a clear and unambiguous correspondence between the two representations of ploidy.
+      - NCIT:C17001
+      - SIO:010278
+  
+  # This is an example of a slot that is required, multivalued, and has a range of datetime. The description provides context for why this information is important and how it can be used in analyses and interpretations of the sample data.
+  collection_date_time:
+    required: true
+    range: datetime
+    multivalued: true
+    description: >-
+      The date and times when the sample was collected. This information is crucial for tracking the temporal context of the sample, 
+      which can be important for various analyses and interpretations. The collection date and time 
+      can provide insights into the conditions under which the sample was collected, such as seasonal variations, time of day, 
+      or specific events that may have influenced the sample's characteristics.
+  
+  tissue_type:
+    required: true
+    range: TissueTypeEnum
+    description: >-
+      The type of plant tissue from which the sample was taken, such as leaf, root, stem, flower, etc. This information can be important for understanding the biological context of the sample and for conducting analyses that are specific to certain tissue types. The tissue type can also provide insights into the functions and characteristics of the sample, as different plant tissues have different roles and properties within the plant organism.
+  
+  sample_size:
+    range: string
+    description: >-
+      The size or quantity of the sample, which can be important for various analyses and interpretations.
+      The sample size can be represented in different units (e.g., grams, milliliters, number of cells, etc.) depending on the type of sample and the context of the analysis.

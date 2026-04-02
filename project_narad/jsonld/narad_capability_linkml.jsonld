@@ -1,0 +1,1969 @@
+{
+  "name": "narad",
+  "description": "NARAD extension for capability-layer semantics and facility-specific signal bindings",
+  "id": "https://w3id.org/narad_linkml/schema/narad/schema",
+  "version": "0.1.0",
+  "imports": [
+    "linkml:types"
+  ],
+  "license": "CC-BY-4.0",
+  "prefixes": [
+    {
+      "prefix_prefix": "linkml",
+      "prefix_reference": "https://w3id.org/linkml/"
+    },
+    {
+      "prefix_prefix": "schema",
+      "prefix_reference": "http://schema.org/"
+    },
+    {
+      "prefix_prefix": "sosa",
+      "prefix_reference": "http://www.w3.org/ns/sosa/"
+    },
+    {
+      "prefix_prefix": "qudt",
+      "prefix_reference": "http://qudt.org/schema/qudt/"
+    },
+    {
+      "prefix_prefix": "si-unit",
+      "prefix_reference": "http://qudt.org/vocab/unit/"
+    },
+    {
+      "prefix_prefix": "ncit",
+      "prefix_reference": "http://purl.obolibrary.org/obo/NCIT_"
+    }
+  ],
+  "default_prefix": "https://w3id.org/narad_linkml/schema/narad/schema/",
+  "default_range": "string",
+  "types": [
+    {
+      "name": "string",
+      "definition_uri": "https://w3id.org/linkml/String",
+      "description": "A character string",
+      "notes": [
+        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string.   If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Text"
+      ],
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "integer",
+      "definition_uri": "https://w3id.org/linkml/Integer",
+      "description": "An integer",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Integer"
+      ],
+      "base": "int",
+      "uri": "http://www.w3.org/2001/XMLSchema#integer",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "boolean",
+      "definition_uri": "https://w3id.org/linkml/Boolean",
+      "description": "A binary (true or false) value",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Boolean"
+      ],
+      "base": "Bool",
+      "uri": "http://www.w3.org/2001/XMLSchema#boolean",
+      "repr": "bool",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "float",
+      "definition_uri": "https://w3id.org/linkml/Float",
+      "description": "A real number that conforms to the xsd:float specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "http://www.w3.org/2001/XMLSchema#float",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "double",
+      "definition_uri": "https://w3id.org/linkml/Double",
+      "description": "A real number that conforms to the xsd:double specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "close_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "http://www.w3.org/2001/XMLSchema#double",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "decimal",
+      "definition_uri": "https://w3id.org/linkml/Decimal",
+      "description": "A real number with arbitrary precision that conforms to the xsd:decimal specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "broad_mappings": [
+        "schema:Number"
+      ],
+      "base": "Decimal",
+      "uri": "http://www.w3.org/2001/XMLSchema#decimal",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "time",
+      "definition_uri": "https://w3id.org/linkml/Time",
+      "description": "A time object represents a (local) time of day, independent of any particular day",
+      "notes": [
+        "URI is dateTime because OWL reasoners do not work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Time"
+      ],
+      "base": "XSDTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#time",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "date",
+      "definition_uri": "https://w3id.org/linkml/Date",
+      "description": "a date (year, month and day) in an idealized calendar",
+      "notes": [
+        "URI is dateTime because OWL reasoners don't work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Date"
+      ],
+      "base": "XSDDate",
+      "uri": "http://www.w3.org/2001/XMLSchema#date",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "datetime",
+      "definition_uri": "https://w3id.org/linkml/Datetime",
+      "description": "The combination of a date and time",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:DateTime"
+      ],
+      "base": "XSDDateTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#dateTime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "date_or_datetime",
+      "definition_uri": "https://w3id.org/linkml/DateOrDatetime",
+      "description": "Either a date or a datetime",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "https://w3id.org/linkml/DateOrDatetime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "uriorcurie",
+      "definition_uri": "https://w3id.org/linkml/Uriorcurie",
+      "description": "a URI or a CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "URIorCURIE",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "curie",
+      "definition_uri": "https://w3id.org/linkml/Curie",
+      "conforms_to": "https://www.w3.org/TR/curie/",
+      "description": "a compact URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"."
+      ],
+      "comments": [
+        "in RDF serializations this MUST be expanded to a URI",
+        "in non-RDF serializations MAY be serialized as the compact representation"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "Curie",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "uri",
+      "definition_uri": "https://w3id.org/linkml/Uri",
+      "conforms_to": "https://www.ietf.org/rfc/rfc3987.txt",
+      "description": "a complete URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"."
+      ],
+      "comments": [
+        "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "close_mappings": [
+        "schema:URL"
+      ],
+      "base": "URI",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "ncname",
+      "definition_uri": "https://w3id.org/linkml/Ncname",
+      "description": "Prefix part of CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "NCName",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "objectidentifier",
+      "definition_uri": "https://w3id.org/linkml/Objectidentifier",
+      "description": "A URI or CURIE that represents an object in the model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"."
+      ],
+      "comments": [
+        "Used for inheritance and type checking"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "ElementIdentifier",
+      "uri": "http://www.w3.org/ns/shex#iri",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "nodeidentifier",
+      "definition_uri": "https://w3id.org/linkml/Nodeidentifier",
+      "description": "A URI, CURIE or BNODE that represents a node in a model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "NodeIdentifier",
+      "uri": "http://www.w3.org/ns/shex#nonLiteral",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "jsonpointer",
+      "definition_uri": "https://w3id.org/linkml/Jsonpointer",
+      "conforms_to": "https://datatracker.ietf.org/doc/html/rfc6901",
+      "description": "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "jsonpath",
+      "definition_uri": "https://w3id.org/linkml/Jsonpath",
+      "conforms_to": "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html",
+      "description": "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "sparqlpath",
+      "definition_uri": "https://w3id.org/linkml/Sparqlpath",
+      "conforms_to": "https://www.w3.org/TR/sparql11-query/#propertypaths",
+      "description": "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    }
+  ],
+  "enums": [
+    {
+      "name": "DataTypeEnum",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/DataTypeEnum",
+      "description": "Allowed data types for signal values.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "permissible_values": [
+        {
+          "text": "None",
+          "description": "A special value that may represent an unknown, missing, not applicable, or undefined value.",
+          "meaning": "ncit:C45255"
+        },
+        {
+          "text": "int",
+          "description": "A data type comprised of numbers with no fractional part, including negative and positive values.",
+          "meaning": "ncit:C47840"
+        },
+        {
+          "text": "float",
+          "description": "A number that can have its decimal point in any position.",
+          "meaning": "ncit:C48150"
+        },
+        {
+          "text": "double",
+          "description": "A 64-bit floating-point value.",
+          "meaning": "ncit:C48870"
+        },
+        {
+          "text": "string",
+          "description": "A sequence of characters used to represent text.",
+          "meaning": "ncit:C45253"
+        },
+        {
+          "text": "boolean",
+          "description": "A data type with two possible values: true and false.",
+          "meaning": "ncit:C45254"
+        },
+        {
+          "text": "boolean_non_null",
+          "description": "A two-value boolean data type that does not include null flavor.",
+          "meaning": "ncit:C95630"
+        },
+        {
+          "text": "date",
+          "description": "A calendar date (year, month, day).",
+          "meaning": "ncit:C48871"
+        },
+        {
+          "text": "coded_value",
+          "description": "A code value referenced from an external coding system or ontology.",
+          "meaning": "ncit:C95637"
+        }
+      ]
+    },
+    {
+      "name": "RelationshipTypeEnum",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum",
+      "description": "Allowed edge labels in the profile-family graph projection.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "permissible_values": [
+        {
+          "text": "HAS_SHARED_CAPABILITY"
+        },
+        {
+          "text": "HAS_TYPE_PROFILE"
+        },
+        {
+          "text": "INHERITS_CAPABILITY"
+        },
+        {
+          "text": "HAS_TYPE_SPECIFIC_CAPABILITY"
+        },
+        {
+          "text": "HAS_SIGNAL"
+        },
+        {
+          "text": "IMPLEMENTED_BY"
+        },
+        {
+          "text": "BINDS_TO"
+        },
+        {
+          "text": "LOCATED_IN"
+        },
+        {
+          "text": "CONTROLLED_BY"
+        }
+      ]
+    },
+    {
+      "name": "ElementKindEnum",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum",
+      "description": "Controlled vocabulary for beamline element types.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "permissible_values": [
+        {
+          "text": "Drift"
+        },
+        {
+          "text": "Marker"
+        },
+        {
+          "text": "BPM"
+        },
+        {
+          "text": "Corrector"
+        },
+        {
+          "text": "Dipole"
+        },
+        {
+          "text": "Quadrupole"
+        },
+        {
+          "text": "Solenoid"
+        },
+        {
+          "text": "RFCavity"
+        },
+        {
+          "text": "Instrument"
+        }
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "narad",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/narad",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/narad",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "NaradModel",
+        "BeamlineElement"
+      ],
+      "range": "NaradConfig",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "schema_version",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/schema_version",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/schema_version",
+      "owner": "NaradConfig",
+      "domain_of": [
+        "NaradConfig"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "intent",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/intent",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/intent",
+      "owner": "NaradConfig",
+      "domain_of": [
+        "NaradConfig"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "facility",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/facility",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/facility",
+      "owner": "PVBinding",
+      "domain_of": [
+        "NaradConfig",
+        "PVBinding"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "control_system",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/control_system",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/control_system",
+      "owner": "PVBinding",
+      "domain_of": [
+        "NaradConfig",
+        "Facility",
+        "PVBinding"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "naming_convention",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/naming_convention",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/naming_convention",
+      "owner": "Facility",
+      "domain_of": [
+        "Facility"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "capability_layer",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_layer",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_layer",
+      "owner": "NaradConfig",
+      "domain_of": [
+        "NaradConfig"
+      ],
+      "range": "CapabilityLayer",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "profiles",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/profiles",
+      "description": "Control profile families keyed by family name.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/profiles",
+      "owner": "CapabilityLayer",
+      "domain_of": [
+        "CapabilityLayer"
+      ],
+      "range": "ControlProfileFamily",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "id",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/id",
+      "description": "Unique identifier for the entity.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/id",
+      "identifier": true,
+      "owner": "TypeSpecificCapability",
+      "domain_of": [
+        "TypeSpecificCapability"
+      ],
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "name",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/name",
+      "description": "Name/identifier of the entity.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/name",
+      "identifier": true,
+      "owner": "KeyValuePair",
+      "domain_of": [
+        "Facility",
+        "SignalBinding",
+        "DeviceTypeSignalSet",
+        "Signal",
+        "Capability",
+        "CapabilityProfile",
+        "ControlProfileFamily",
+        "Beamline",
+        "BeamlineElement",
+        "PVBinding",
+        "KeyValuePair"
+      ],
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "description",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/description",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/description",
+      "owner": "ControlProfileFamily",
+      "domain_of": [
+        "SignalBinding",
+        "Signal",
+        "Capability",
+        "TypeSpecificCapability",
+        "CapabilityProfile",
+        "ControlProfileFamily"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "capability_class",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_class",
+      "description": "Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCapability). Serialized as 'class' in source YAML; renamed here to avoid conflict with reserved keywords.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "aliases": [
+        "class"
+      ],
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_class",
+      "owner": "TypeSpecificCapability",
+      "domain_of": [
+        "TypeSpecificCapability"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "kind",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/kind",
+      "description": "Kind/type of the profile family or profile instance.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "aliases": [
+        "type",
+        "profile_type"
+      ],
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/kind",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "CapabilityProfile",
+        "ControlProfileFamily",
+        "Beamline",
+        "BeamlineElement"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "class",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/class",
+      "description": "Class label used in profile payloads (for example, QuadrupoleStrengthCapability).",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/class",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "role",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/role",
+      "description": "The role of the signal in the control model.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/role",
+      "owner": "Signal",
+      "domain_of": [
+        "Signal"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "data_type",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/data_type",
+      "description": "The data type of the signal's value.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "broad_mappings": [
+        "http://purl.obolibrary.org/obo/NCIT_C42645",
+        "http://qudt.org/schema/qudt/Datatype"
+      ],
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/data_type",
+      "owner": "Signal",
+      "domain_of": [
+        "Signal"
+      ],
+      "range": "DataTypeEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "units",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/units",
+      "description": "Units of measurement or null for unitless values.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "broad_mappings": [
+        "http://qudt.org/vocab/unit/Unit"
+      ],
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/units",
+      "owner": "Signal",
+      "domain_of": [
+        "Signal"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "signals",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signals",
+      "description": "Signals within a capability.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signals",
+      "owner": "TypeSpecificCapability",
+      "domain_of": [
+        "Capability",
+        "TypeSpecificCapability"
+      ],
+      "range": "Signal",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "shared_capabilities",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities",
+      "description": "Named shared capabilities reused by profile types in a family.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities",
+      "owner": "ControlProfileFamily",
+      "domain_of": [
+        "ControlProfileFamily"
+      ],
+      "range": "Capability",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "inherits_shared_capabilities",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/inherits_shared_capabilities",
+      "description": "Names of shared capabilities inherited by the profile.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/inherits_shared_capabilities",
+      "owner": "CapabilityProfile",
+      "domain_of": [
+        "CapabilityProfile"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "type_specific_capabilities",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities",
+      "description": "Type-specific capabilities declared directly in a profile, each with an id, class label, description, and signals.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities",
+      "owner": "CapabilityProfile",
+      "domain_of": [
+        "CapabilityProfile"
+      ],
+      "range": "TypeSpecificCapability",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "magnet_type_profiles",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_profiles",
+      "description": "Magnet profile definitions keyed by profile name.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_profiles",
+      "owner": "ControlProfileFamily",
+      "domain_of": [
+        "ControlProfileFamily"
+      ],
+      "range": "CapabilityProfile",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "instrument_type_profiles",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_profiles",
+      "description": "Instrument profile definitions keyed by profile name.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_profiles",
+      "owner": "ControlProfileFamily",
+      "domain_of": [
+        "ControlProfileFamily"
+      ],
+      "range": "CapabilityProfile",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "cavity_type_profiles",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/cavity_type_profiles",
+      "description": "RF cavity profile definitions keyed by profile name.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/cavity_type_profiles",
+      "owner": "ControlProfileFamily",
+      "domain_of": [
+        "ControlProfileFamily"
+      ],
+      "range": "CapabilityProfile",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "graph_projection",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/graph_projection",
+      "description": "Optional graph projection metadata attached to a profile family.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/graph_projection",
+      "owner": "ControlProfileFamily",
+      "domain_of": [
+        "ControlProfileFamily"
+      ],
+      "range": "GraphProjection",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "node_labels",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/node_labels",
+      "description": "Node label mapping for the graph projection.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/node_labels",
+      "owner": "GraphProjection",
+      "domain_of": [
+        "GraphProjection"
+      ],
+      "range": "NodeLabels",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "device",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/device",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/device",
+      "owner": "NodeLabels",
+      "domain_of": [
+        "NodeLabels"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "capability_family",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_family",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_family",
+      "owner": "NodeLabels",
+      "domain_of": [
+        "NodeLabels"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "profile",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/profile",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/profile",
+      "owner": "NodeLabels",
+      "domain_of": [
+        "NodeLabels"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "capability",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability",
+      "owner": "NodeLabels",
+      "domain_of": [
+        "NodeLabels"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "signal",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal",
+      "owner": "NodeLabels",
+      "domain_of": [
+        "NodeLabels"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "relationships",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/relationships",
+      "description": "Relationship labels used in graph projection.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/relationships",
+      "owner": "GraphProjection",
+      "domain_of": [
+        "GraphProjection"
+      ],
+      "range": "RelationshipTypeEnum",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "signal_layer",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal_layer",
+      "description": "Signal-layer container for facility-specific signal bindings.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal_layer",
+      "owner": "NaradConfig",
+      "domain_of": [
+        "NaradConfig"
+      ],
+      "range": "SignalLayer",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "facilities",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/facilities",
+      "description": "Facility identifiers for facility-specific signal bindings.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/facilities",
+      "owner": "SignalLayer",
+      "domain_of": [
+        "SignalLayer"
+      ],
+      "range": "Facility",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "signal_definitions",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal_definitions",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal_definitions",
+      "owner": "Facility",
+      "domain_of": [
+        "Facility"
+      ],
+      "range": "SignalDefinitions",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "epics_suffix",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/epics_suffix",
+      "description": "Facility-specific EPICS suffix for a semantic signal.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/epics_suffix",
+      "owner": "SignalBinding",
+      "domain_of": [
+        "SignalBinding"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "shared_magnet_signals",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/shared_magnet_signals",
+      "description": "Shared magnet signal definitions keyed by signal name.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/shared_magnet_signals",
+      "owner": "SignalDefinitions",
+      "domain_of": [
+        "SignalDefinitions"
+      ],
+      "range": "SignalBinding",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "cavity_signals",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/cavity_signals",
+      "description": "Cavity signal definitions keyed by signal name.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/cavity_signals",
+      "owner": "SignalDefinitions",
+      "domain_of": [
+        "SignalDefinitions"
+      ],
+      "range": "SignalBinding",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "magnet_type_signals",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_signals",
+      "description": "Magnet-type-specific signal definition groups keyed by device type.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_signals",
+      "owner": "SignalDefinitions",
+      "domain_of": [
+        "SignalDefinitions"
+      ],
+      "range": "DeviceTypeSignalSet",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "instrument_type_signals",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_signals",
+      "description": "Instrument-type-specific signal definition groups keyed by device type.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_signals",
+      "owner": "SignalDefinitions",
+      "domain_of": [
+        "SignalDefinitions"
+      ],
+      "range": "DeviceTypeSignalSet",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "signal_bindings",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings",
+      "description": "Signal definitions keyed by signal name within a device type.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings",
+      "owner": "ElementNaradRef",
+      "domain_of": [
+        "DeviceTypeSignalSet",
+        "ElementNaradRef"
+      ],
+      "range": "SignalBinding",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "beamlines",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/beamlines",
+      "description": "Ordered list of beamlines in this NARAD document.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/beamlines",
+      "owner": "NaradModel",
+      "domain_of": [
+        "NaradModel"
+      ],
+      "range": "Beamline",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "elements",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/elements",
+      "description": "Beamline element definitions (referenced by name from beamline line sequences).",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/elements",
+      "owner": "NaradModel",
+      "domain_of": [
+        "NaradModel"
+      ],
+      "range": "BeamlineElement",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "line",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/line",
+      "description": "Ordered sequence of cross-referenced element names forming a beamline.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/line",
+      "owner": "Beamline",
+      "domain_of": [
+        "Beamline"
+      ],
+      "range": "BeamlineElement",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "length",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/length",
+      "description": "Physical length of the element in meters.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/length",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "BeamlineElement"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "RFP",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/RFP",
+      "description": "RF cavity physics parameters block.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/RFP",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "BeamlineElement"
+      ],
+      "range": "RFParams",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BendP",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/BendP",
+      "description": "Dipole/bend physics parameters block.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/BendP",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "BeamlineElement"
+      ],
+      "range": "BendParams",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "MagneticMultipoleP",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleP",
+      "description": "Magnetic multipole physics parameters block.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleP",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "BeamlineElement"
+      ],
+      "range": "MagneticMultipoleParams",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "SolenoidP",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SolenoidP",
+      "description": "Solenoid physics parameters block.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SolenoidP",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "BeamlineElement"
+      ],
+      "range": "SolenoidParams",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "JLabP",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/JLabP",
+      "description": "JLab-specific element parameters block.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/JLabP",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "BeamlineElement"
+      ],
+      "range": "JLabParams",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "capability_profile_family",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_profile_family",
+      "description": "Cross-reference to the control profile family for this element.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_profile_family",
+      "owner": "ElementNaradRef",
+      "domain_of": [
+        "ElementNaradRef"
+      ],
+      "range": "ControlProfileFamily",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "capability_profile",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_profile",
+      "description": "Cross-reference to the specific capability profile applied to this element.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/capability_profile",
+      "owner": "ElementNaradRef",
+      "domain_of": [
+        "ElementNaradRef"
+      ],
+      "range": "CapabilityProfile",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "magnet_semantics",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/magnet_semantics",
+      "description": "Magnet-domain semantic context for this element.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/magnet_semantics",
+      "owner": "ElementNaradRef",
+      "domain_of": [
+        "ElementNaradRef"
+      ],
+      "range": "ElementSemantics",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "instrument_semantics",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/instrument_semantics",
+      "description": "Instrument-domain semantic context for this element.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/instrument_semantics",
+      "owner": "ElementNaradRef",
+      "domain_of": [
+        "ElementNaradRef"
+      ],
+      "range": "ElementSemantics",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "cavity_semantics",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/cavity_semantics",
+      "description": "RF-cavity-domain semantic context for this element.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/cavity_semantics",
+      "owner": "ElementNaradRef",
+      "domain_of": [
+        "ElementNaradRef"
+      ],
+      "range": "ElementSemantics",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "pv",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/pv",
+      "description": "The EPICS Process Variable name (e.g. MBHK101H.S).",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/pv",
+      "owner": "PVBinding",
+      "domain_of": [
+        "PVBinding"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "frequency",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/frequency",
+      "description": "RF frequency in Hz.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/frequency",
+      "owner": "RFParams",
+      "domain_of": [
+        "RFParams"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "voltage",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/voltage",
+      "description": "RF voltage in volts.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/voltage",
+      "owner": "RFParams",
+      "domain_of": [
+        "RFParams"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "phase",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/phase",
+      "description": "RF phase in degrees.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/phase",
+      "owner": "RFParams",
+      "domain_of": [
+        "RFParams"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "angle_ref",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/angle_ref",
+      "description": "Reference bend angle in radians.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/angle_ref",
+      "owner": "BendParams",
+      "domain_of": [
+        "BendParams"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "e1",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/e1",
+      "description": "Entry edge angle in radians.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/e1",
+      "owner": "BendParams",
+      "domain_of": [
+        "BendParams"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "e2",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/e2",
+      "description": "Exit edge angle in radians.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/e2",
+      "owner": "BendParams",
+      "domain_of": [
+        "BendParams"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "kn1",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/kn1",
+      "description": "First-order magnetic multipole coefficient (quadrupole strength).",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/kn1",
+      "owner": "MagneticMultipoleParams",
+      "domain_of": [
+        "MagneticMultipoleParams"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ksol",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/ksol",
+      "description": "Solenoid integrated field strength.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/ksol",
+      "owner": "SolenoidParams",
+      "domain_of": [
+        "SolenoidParams"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "jlab_type",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/jlab_type",
+      "description": "JLab-specific element type designation (e.g. WarmCavity, QW, HCorrector). Serialized as 'type' in source YAML; renamed here to avoid conflict with the LinkML metamodel 'type' designator used for polymorphic class selection.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "aliases": [
+        "type"
+      ],
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/jlab_type",
+      "owner": "JLabParams",
+      "domain_of": [
+        "JLabParams"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modeled_as",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/modeled_as",
+      "description": "Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK).",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/modeled_as",
+      "owner": "JLabParams",
+      "domain_of": [
+        "JLabParams"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "properties",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/properties",
+      "description": "Open-ended key-value property map for element-specific parameters.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/properties",
+      "owner": "JLabParams",
+      "domain_of": [
+        "JLabParams"
+      ],
+      "range": "KeyValuePair",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "value",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/value",
+      "description": "Property value as a string.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/value",
+      "owner": "KeyValuePair",
+      "domain_of": [
+        "KeyValuePair"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "elementSemantics__shared_capabilities",
+      "description": "Names of shared capabilities applied to this element, referencing Capability by name.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities",
+      "alias": "shared_capabilities",
+      "owner": "ElementSemantics",
+      "domain_of": [
+        "ElementSemantics"
+      ],
+      "range": "Capability",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "elementSemantics__type_specific_capabilities",
+      "description": "Capability class labels (e.g. CorrectorKickCapability) identifying which type-specific capabilities apply to this element. These match the capability_class field of TypeSpecificCapability entries in the profile.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities",
+      "alias": "type_specific_capabilities",
+      "owner": "ElementSemantics",
+      "domain_of": [
+        "ElementSemantics"
+      ],
+      "range": "TypeSpecificCapability",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BeamlineElement_kind",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/kind",
+      "description": "Kind/type of the profile family or profile instance.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "aliases": [
+        "type",
+        "profile_type"
+      ],
+      "is_a": "kind",
+      "domain": "BeamlineElement",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/kind",
+      "alias": "kind",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "BeamlineElement"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "kind",
+      "range": "ElementKindEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "BeamlineElement_narad",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/narad",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "is_a": "narad",
+      "domain": "BeamlineElement",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/narad",
+      "alias": "narad",
+      "owner": "BeamlineElement",
+      "domain_of": [
+        "BeamlineElement"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "narad",
+      "range": "ElementNaradRef",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ElementNaradRef_signal_bindings",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings",
+      "description": "Signal definitions keyed by signal name within a device type.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "is_a": "signal_bindings",
+      "domain": "ElementNaradRef",
+      "slot_uri": "https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings",
+      "alias": "signal_bindings",
+      "owner": "ElementNaradRef",
+      "domain_of": [
+        "ElementNaradRef"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "signal_bindings",
+      "range": "PVBinding",
+      "multivalued": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    }
+  ],
+  "classes": [
+    {
+      "name": "NaradModel",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/NaradModel",
+      "description": "Top-level NARAD document container.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "narad",
+        "beamlines",
+        "elements"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/NaradModel",
+      "tree_root": true,
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "NaradConfig",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/NaradConfig",
+      "description": "NARAD configuration block containing the capability layer.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "schema_version",
+        "intent",
+        "capability_layer",
+        "facility",
+        "control_system",
+        "signal_layer"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/NaradConfig",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "CapabilityLayer",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/CapabilityLayer",
+      "description": "Capability-layer container for profile families.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "profiles"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/CapabilityLayer",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SignalLayer",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SignalLayer",
+      "description": "Signal-layer container for facility-specific signal bindings.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "facilities"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SignalLayer",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Facility",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/Facility",
+      "description": "A facility with specific signal bindings.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "name",
+        "control_system",
+        "naming_convention",
+        "signal_definitions"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/Facility",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SignalDefinitions",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SignalDefinitions",
+      "description": "Grouped EPICS signal suffix templates by semantic category.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "shared_magnet_signals",
+        "magnet_type_signals",
+        "instrument_type_signals",
+        "cavity_signals"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SignalDefinitions",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SignalBinding",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding",
+      "description": "A named EPICS suffix definition for one semantic signal.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "name",
+        "epics_suffix",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "DeviceTypeSignalSet",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet",
+      "description": "Signal binding set scoped to a device type (for example, Quadrupole or BPM).",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "name",
+        "signal_bindings"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Signal",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/Signal",
+      "description": "A named semantic signal used by a capability.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "aliases": [
+        "epics_pv",
+        "pv",
+        "process_variable",
+        "EPICS Process Variable"
+      ],
+      "mappings": [
+        "sosa:ObservableProperty"
+      ],
+      "broad_mappings": [
+        "qudt:QuantityKind"
+      ],
+      "slots": [
+        "name",
+        "role",
+        "data_type",
+        "units",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "http://www.w3.org/ns/sosa/ObservableProperty",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Capability",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/Capability",
+      "description": "A grouping of related signals for a control aspect.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "name",
+        "description",
+        "signals"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/Capability",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TypeSpecificCapability",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability",
+      "description": "An inline capability declared within a device-type profile, with its own identifier, a semantic class label, a description, and a list of signals. Distinct from the shared capabilities referenced by name; these are profile-local definitions.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "id",
+        "capability_class",
+        "description",
+        "signals"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "CapabilityProfile",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile",
+      "description": "A device-type profile that reuses shared capabilities and adds specific capabilities.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "name",
+        "kind",
+        "description",
+        "inherits_shared_capabilities",
+        "type_specific_capabilities"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "NodeLabels",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/NodeLabels",
+      "description": "Labels used when projecting the profile model into a graph view.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "device",
+        "capability_family",
+        "profile",
+        "capability",
+        "signal"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/NodeLabels",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "GraphProjection",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/GraphProjection",
+      "description": "Graph projection metadata for node labels and edge categories.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "node_labels",
+        "relationships"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/GraphProjection",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ControlProfileFamily",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily",
+      "description": "A reusable family of control profiles sharing common semantics and structure.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "aliases": [
+        "capability_profile_family",
+        "control_profile_family"
+      ],
+      "slots": [
+        "name",
+        "kind",
+        "description",
+        "shared_capabilities",
+        "magnet_type_profiles",
+        "instrument_type_profiles",
+        "cavity_type_profiles",
+        "graph_projection"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Beamline",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/Beamline",
+      "description": "An ordered sequence of beamline elements defining a beam path.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "name",
+        "kind",
+        "line"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/Beamline",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BeamlineElement",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement",
+      "description": "A single element in a beamline with optional physics parameter blocks.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "name",
+        "BeamlineElement_kind",
+        "length",
+        "RFP",
+        "BendP",
+        "MagneticMultipoleP",
+        "SolenoidP",
+        "BeamlineElement_narad",
+        "JLabP"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ElementNaradRef",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/ElementNaradRef",
+      "description": "NARAD semantic reference block attached to a beamline element.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "capability_profile_family",
+        "capability_profile",
+        "magnet_semantics",
+        "instrument_semantics",
+        "cavity_semantics",
+        "ElementNaradRef_signal_bindings"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/ElementNaradRef",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ElementSemantics",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics",
+      "description": "Semantic context referencing shared and type-specific capability names for a beamline element.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "elementSemantics__shared_capabilities",
+        "elementSemantics__type_specific_capabilities"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "shared_capabilities",
+          "description": "Names of shared capabilities applied to this element, referencing Capability by name.",
+          "range": "Capability",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "type_specific_capabilities",
+          "description": "Capability class labels (e.g. CorrectorKickCapability) identifying which type-specific capabilities apply to this element. These match the capability_class field of TypeSpecificCapability entries in the profile.",
+          "range": "TypeSpecificCapability",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PVBinding",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/PVBinding",
+      "description": "A concrete PV (Process Variable) binding for one semantic signal on a beamline element.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "name",
+        "facility",
+        "control_system",
+        "pv"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/PVBinding",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "RFParams",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/RFParams",
+      "description": "RF cavity physics parameters (frequency, voltage, phase).",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "frequency",
+        "voltage",
+        "phase"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/RFParams",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BendParams",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/BendParams",
+      "description": "Dipole/bend physics parameters (entry angle, exit edge angles).",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "angle_ref",
+        "e1",
+        "e2"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/BendParams",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MagneticMultipoleParams",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleParams",
+      "description": "Magnetic multipole physics parameters.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "kn1"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleParams",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SolenoidParams",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SolenoidParams",
+      "description": "Solenoid physics parameters.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "ksol"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/SolenoidParams",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "JLabParams",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/JLabParams",
+      "description": "JLab-specific element parameters: type designation, accelerator model name, and open property map.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "jlab_type",
+        "modeled_as",
+        "properties"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/JLabParams",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "KeyValuePair",
+      "definition_uri": "https://w3id.org/narad_linkml/schema/narad/schema/KeyValuePair",
+      "description": "A generic key-value pair for open-ended property maps.",
+      "from_schema": "https://w3id.org/narad_linkml/schema/narad/schema",
+      "slots": [
+        "name",
+        "value"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/narad_linkml/schema/narad/schema/KeyValuePair",
+      "@type": "ClassDefinition"
+    }
+  ],
+  "metamodel_version": "1.7.0",
+  "source_file": "narad_capability_linkml.yaml",
+  "source_file_date": "2026-04-02T09:51:10",
+  "source_file_size": 16336,
+  "generation_date": "2026-04-02T09:53:44",
+  "@type": "SchemaDefinition",
+  "@context": [
+    "project_narad/jsonld/narad_capability_linkml.context.jsonld",
+    "https://w3id.org/linkml/types.context.jsonld",
+    {
+      "@base": "https://w3id.org/narad_linkml/schema/narad/schema/"
+    }
+  ]
+}

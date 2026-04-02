@@ -1,0 +1,8 @@
+# tests/data/valid/PlantTissueSample-001.yaml
+id: 1
+sample_container: tube
+ploidy: diploid
+collection_date_time:
+  - blah blah
+tissue_type: leaf
+sample_size: 1.0 g

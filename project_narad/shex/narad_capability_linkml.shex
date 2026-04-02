@@ -1,0 +1,297 @@
+# metamodel_version: 1.7.0
+# version: 0.1.0
+BASE <https://w3id.org/narad_linkml/schema/narad/schema/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:time
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Curie xsd:string
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+linkml:Jsonpointer xsd:string
+
+linkml:Jsonpath xsd:string
+
+linkml:Sparqlpath xsd:string
+
+<Beamline> CLOSED {
+    (  $<Beamline_tes> (  <kind> @linkml:String ? ;
+          <line> @<BeamlineElement> *
+       ) ;
+       rdf:type [ <Beamline> ]
+    )
+}
+
+<BeamlineElement> CLOSED {
+    (  $<BeamlineElement_tes> (  <kind> [ <https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum#Drift>
+             <https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum#Marker>
+             <https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum#BPM>
+             <https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum#Corrector>
+             <https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum#Dipole>
+             <https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum#Quadrupole>
+             <https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum#Solenoid>
+             <https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum#RFCavity>
+             <https://w3id.org/narad_linkml/schema/narad/schema/ElementKindEnum#Instrument> ] ? ;
+          <length> @linkml:Float ? ;
+          <RFP> @<RFParams> ? ;
+          <BendP> @<BendParams> ? ;
+          <MagneticMultipoleP> @<MagneticMultipoleParams> ? ;
+          <SolenoidP> @<SolenoidParams> ? ;
+          <narad> @<ElementNaradRef> ? ;
+          <JLabP> @<JLabParams> ?
+       ) ;
+       rdf:type [ <BeamlineElement> ]
+    )
+}
+
+<BendParams> CLOSED {
+    (  $<BendParams_tes> (  <angle_ref> @linkml:Float ? ;
+          <e1> @linkml:Float ? ;
+          <e2> @linkml:Float ?
+       ) ;
+       rdf:type [ <BendParams> ] ?
+    )
+}
+
+<Capability> CLOSED {
+    (  $<Capability_tes> (  <description> @linkml:String ? ;
+          <signals> @<Signal> *
+       ) ;
+       rdf:type [ <Capability> ]
+    )
+}
+
+<CapabilityLayer> CLOSED {
+    (  $<CapabilityLayer_tes> <profiles> @<ControlProfileFamily> * ;
+       rdf:type [ <CapabilityLayer> ] ?
+    )
+}
+
+<CapabilityProfile> CLOSED {
+    (  $<CapabilityProfile_tes> (  <kind> @linkml:String ? ;
+          <description> @linkml:String ? ;
+          <inherits_shared_capabilities> @linkml:String * ;
+          <type_specific_capabilities> @<TypeSpecificCapability> *
+       ) ;
+       rdf:type [ <CapabilityProfile> ]
+    )
+}
+
+<ControlProfileFamily> CLOSED {
+    (  $<ControlProfileFamily_tes> (  <kind> @linkml:String ? ;
+          <description> @linkml:String ? ;
+          <shared_capabilities> @<Capability> * ;
+          <magnet_type_profiles> @<CapabilityProfile> * ;
+          <instrument_type_profiles> @<CapabilityProfile> * ;
+          <cavity_type_profiles> @<CapabilityProfile> * ;
+          <graph_projection> @<GraphProjection> ?
+       ) ;
+       rdf:type [ <ControlProfileFamily> ]
+    )
+}
+
+<DeviceTypeSignalSet> CLOSED {
+    (  $<DeviceTypeSignalSet_tes> <signal_bindings> @<SignalBinding> * ;
+       rdf:type [ <DeviceTypeSignalSet> ]
+    )
+}
+
+<ElementNaradRef> CLOSED {
+    (  $<ElementNaradRef_tes> (  <capability_profile_family> @<ControlProfileFamily> ? ;
+          <capability_profile> @<CapabilityProfile> ? ;
+          <magnet_semantics> @<ElementSemantics> ? ;
+          <instrument_semantics> @<ElementSemantics> ? ;
+          <cavity_semantics> @<ElementSemantics> ? ;
+          <signal_bindings> @<PVBinding> *
+       ) ;
+       rdf:type [ <ElementNaradRef> ] ?
+    )
+}
+
+<ElementSemantics> CLOSED {
+    (  $<ElementSemantics_tes> (  <shared_capabilities> @<Capability> * ;
+          <type_specific_capabilities> @<TypeSpecificCapability> *
+       ) ;
+       rdf:type [ <ElementSemantics> ] ?
+    )
+}
+
+<Facility> CLOSED {
+    (  $<Facility_tes> (  <control_system> @linkml:String ? ;
+          <naming_convention> @linkml:String ? ;
+          <signal_definitions> @<SignalDefinitions> ?
+       ) ;
+       rdf:type [ <Facility> ]
+    )
+}
+
+<GraphProjection> CLOSED {
+    (  $<GraphProjection_tes> (  <node_labels> @<NodeLabels> ? ;
+          <relationships> [ <https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum#HAS_SHARED_CAPABILITY>
+             <https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum#HAS_TYPE_PROFILE>
+             <https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum#INHERITS_CAPABILITY>
+             <https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum#HAS_TYPE_SPECIFIC_CAPABILITY>
+             <https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum#HAS_SIGNAL>
+             <https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum#IMPLEMENTED_BY>
+             <https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum#BINDS_TO>
+             <https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum#LOCATED_IN>
+             <https://w3id.org/narad_linkml/schema/narad/schema/RelationshipTypeEnum#CONTROLLED_BY> ] *
+       ) ;
+       rdf:type [ <GraphProjection> ] ?
+    )
+}
+
+<JLabParams> CLOSED {
+    (  $<JLabParams_tes> (  <jlab_type> @linkml:String ? ;
+          <modeled_as> @linkml:String ? ;
+          <properties> @<KeyValuePair> *
+       ) ;
+       rdf:type [ <JLabParams> ] ?
+    )
+}
+
+<KeyValuePair> CLOSED {
+    (  $<KeyValuePair_tes> <value> @linkml:String ? ;
+       rdf:type [ <KeyValuePair> ]
+    )
+}
+
+<MagneticMultipoleParams> CLOSED {
+    (  $<MagneticMultipoleParams_tes> <kn1> @linkml:Float ? ;
+       rdf:type [ <MagneticMultipoleParams> ] ?
+    )
+}
+
+<NaradConfig> CLOSED {
+    (  $<NaradConfig_tes> (  <schema_version> @linkml:String ? ;
+          <intent> @linkml:String ? ;
+          <capability_layer> @<CapabilityLayer> ? ;
+          <facility> @linkml:String ? ;
+          <control_system> @linkml:String ? ;
+          <signal_layer> @<SignalLayer> ?
+       ) ;
+       rdf:type [ <NaradConfig> ] ?
+    )
+}
+
+<NaradModel> CLOSED {
+    (  $<NaradModel_tes> (  <narad> @<NaradConfig> ? ;
+          <beamlines> @<Beamline> * ;
+          <elements> @<BeamlineElement> *
+       ) ;
+       rdf:type [ <NaradModel> ] ?
+    )
+}
+
+<NodeLabels> CLOSED {
+    (  $<NodeLabels_tes> (  <device> @linkml:String ? ;
+          <capability_family> @linkml:String ? ;
+          <profile> @linkml:String ? ;
+          <capability> @linkml:String ? ;
+          <signal> @linkml:String ?
+       ) ;
+       rdf:type [ <NodeLabels> ] ?
+    )
+}
+
+<PVBinding> CLOSED {
+    (  $<PVBinding_tes> (  <facility> @linkml:String ? ;
+          <control_system> @linkml:String ? ;
+          <pv> @linkml:String ?
+       ) ;
+       rdf:type [ <PVBinding> ]
+    )
+}
+
+<RFParams> CLOSED {
+    (  $<RFParams_tes> (  <frequency> @linkml:Float ? ;
+          <voltage> @linkml:Float ? ;
+          <phase> @linkml:Float ?
+       ) ;
+       rdf:type [ <RFParams> ] ?
+    )
+}
+
+<Signal> CLOSED {
+    (  $<Signal_tes> (  <role> @linkml:String ? ;
+          <data_type> [ <http://purl.obolibrary.org/obo/NCIT_C45255> <http://purl.obolibrary.org/obo/NCIT_C47840>
+             <http://purl.obolibrary.org/obo/NCIT_C48150> <http://purl.obolibrary.org/obo/NCIT_C48870>
+             <http://purl.obolibrary.org/obo/NCIT_C45253> <http://purl.obolibrary.org/obo/NCIT_C45254>
+             <http://purl.obolibrary.org/obo/NCIT_C95630> <http://purl.obolibrary.org/obo/NCIT_C48871>
+             <http://purl.obolibrary.org/obo/NCIT_C95637> ] ? ;
+          <units> @linkml:String ? ;
+          <description> @linkml:String ?
+       ) ;
+       rdf:type [ sosa:ObservableProperty ]
+    )
+}
+
+<SignalBinding> CLOSED {
+    (  $<SignalBinding_tes> (  <epics_suffix> @linkml:String ? ;
+          <description> @linkml:String ?
+       ) ;
+       rdf:type [ <SignalBinding> ]
+    )
+}
+
+<SignalDefinitions> CLOSED {
+    (  $<SignalDefinitions_tes> (  <shared_magnet_signals> @<SignalBinding> * ;
+          <magnet_type_signals> @<DeviceTypeSignalSet> * ;
+          <instrument_type_signals> @<DeviceTypeSignalSet> * ;
+          <cavity_signals> @<SignalBinding> *
+       ) ;
+       rdf:type [ <SignalDefinitions> ] ?
+    )
+}
+
+<SignalLayer> CLOSED {
+    (  $<SignalLayer_tes> <facilities> @<Facility> * ;
+       rdf:type [ <SignalLayer> ] ?
+    )
+}
+
+<SolenoidParams> CLOSED {
+    (  $<SolenoidParams_tes> <ksol> @linkml:Float ? ;
+       rdf:type [ <SolenoidParams> ] ?
+    )
+}
+
+<TypeSpecificCapability> CLOSED {
+    (  $<TypeSpecificCapability_tes> (  <capability_class> @linkml:String ? ;
+          <description> @linkml:String ? ;
+          <signals> @<Signal> *
+       ) ;
+       rdf:type [ <TypeSpecificCapability> ]
+    )
+}

@@ -1,0 +1,639 @@
+id: https://w3id.org/narad_linkml/schema/narad/schema
+name: narad
+description: >-
+  NARAD extension for capability-layer semantics and facility-specific signal bindings
+license: CC-BY-4.0
+version: 0.1.0
+
+prefixes:
+  linkml: "https://w3id.org/linkml/"
+  schema: "http://schema.org/"
+  sosa: "http://www.w3.org/ns/sosa/"
+  qudt: "http://qudt.org/schema/qudt/"
+  si-unit: "http://qudt.org/vocab/unit/"
+  ncit: "http://purl.obolibrary.org/obo/NCIT_"
+
+imports:
+  - linkml:types
+
+classes:
+  NaradModel:
+    description: "Top-level NARAD document container."
+    tree_root: true
+    slots:
+      - narad
+      - beamlines
+      - elements
+
+  NaradConfig:
+    description: "NARAD configuration block containing the capability layer."
+    slots:
+      - schema_version
+      - intent
+      - capability_layer
+      - facility
+      - control_system
+      - signal_layer
+
+  CapabilityLayer:
+    description: "Capability-layer container for profile families."
+    slots:
+      - profiles
+
+  SignalLayer:
+    description: "Signal-layer container for facility-specific signal bindings."
+    slots:
+      - facilities
+  
+  Facility:
+    description: "A facility with specific signal bindings."
+    slots:
+      - name
+      - control_system
+      - naming_convention
+      - signal_definitions
+
+  SignalDefinitions:
+    description: "Grouped EPICS signal suffix templates by semantic category."
+    slots:
+      - shared_magnet_signals
+      - magnet_type_signals
+      - instrument_type_signals
+      - cavity_signals
+
+  SignalBinding:
+    description: "A named EPICS suffix definition for one semantic signal."
+    slots:
+      - name
+      - epics_suffix
+      - description
+
+  DeviceTypeSignalSet:
+    description: "Signal binding set scoped to a device type (for example, Quadrupole or BPM)."
+    slots:
+      - name
+      - signal_bindings
+
+  Signal:
+    description: "A named semantic signal used by a capability."
+    class_uri: sosa:ObservableProperty
+    aliases:
+      - epics_pv
+      - pv
+      - process_variable
+      - EPICS Process Variable
+    broad_mappings:
+      - qudt:QuantityKind
+    slots:
+      - name
+      - role
+      - data_type
+      - units
+      - description
+
+  Capability:
+    description: "A grouping of related signals for a control aspect."
+    slots:
+      - name
+      - description
+      - signals
+
+  TypeSpecificCapability:
+    description: >-
+      An inline capability declared within a device-type profile, with its own identifier,
+      a semantic class label, a description, and a list of signals. Distinct from the
+      shared capabilities referenced by name; these are profile-local definitions.
+    slots:
+      - id
+      - class
+      - description
+      - signals
+
+  CapabilityProfile:
+    description: "A device-type profile that reuses shared capabilities and adds specific capabilities."
+    slots:
+      - name
+      - kind
+      - description
+      - inherits_shared_capabilities
+      - type_specific_capabilities
+
+  NodeLabels:
+    description: "Labels used when projecting the profile model into a graph view."
+    slots:
+      - device
+      - capability_family
+      - profile
+      - capability
+      - signal
+
+  GraphProjection:
+    description: "Graph projection metadata for node labels and edge categories."
+    slots:
+      - node_labels
+      - relationships
+
+  ControlProfileFamily:
+    description: "A reusable family of control profiles sharing common semantics and structure."
+    aliases:
+      - capability_profile_family
+      - control_profile_family
+    slots:
+      - name
+      - kind
+      - description
+      - shared_capabilities
+      - magnet_type_profiles
+      - instrument_type_profiles
+      - cavity_type_profiles
+      - graph_projection
+
+  Beamline:
+    description: "An ordered sequence of beamline elements defining a beam path."
+    slots:
+      - inlined_name
+      - kind
+      - line
+
+  BeamlineElement:
+    description: "A single element in a beamline with optional physics parameter blocks."
+    slots:
+      - name
+      - kind
+      - length
+      - RFP
+      - BendP
+      - MagneticMultipoleP
+      - SolenoidP
+      - narad
+      - JLabP
+    slot_usage:
+      kind:
+        range: ElementKindEnum
+      narad:
+        range: ElementNaradRef
+
+  ElementNaradRef:
+    description: "NARAD semantic reference block attached to a beamline element."
+    slots:
+      - capability_profile_family
+      - capability_profile
+      - magnet_semantics
+      - instrument_semantics
+      - cavity_semantics
+      - signal_bindings
+    slot_usage:
+      signal_bindings:
+        range: PVBinding
+
+  ElementSemantics:
+    description: "Semantic context referencing shared and type-specific capability names for a beamline element."
+    attributes:
+      shared_capabilities:
+        range: Capability
+        multivalued: true
+        inlined: false
+        description: "Names of shared capabilities applied to this element, referencing Capability by name."
+      type_specific_capabilities:
+        range: TypeSpecificCapability
+        multivalued: true
+        description: >-
+          Capability class labels (e.g. CorrectorKickCapability) identifying which
+          type-specific capabilities apply to this element. These match the
+          capability_class field of TypeSpecificCapability entries in the profile.
+
+  PVBinding:
+    description: "A concrete PV (Process Variable) binding for one semantic signal on a beamline element."
+    slots:
+      - name
+      - facility
+      - control_system
+      - pv
+
+  RFParams:
+    description: "RF cavity physics parameters (frequency, voltage, phase)."
+    slots:
+      - frequency
+      - voltage
+      - phase
+
+  BendParams:
+    description: "Dipole/bend physics parameters (entry angle, exit edge angles)."
+    slots:
+      - angle_ref
+      - e1
+      - e2
+
+  MagneticMultipoleParams:
+    description: "Magnetic multipole physics parameters."
+    slots:
+      - Kn1
+
+  SolenoidParams:
+    description: "Solenoid physics parameters."
+    slots:
+      - Ksol
+
+  JLabParams:
+    description: "JLab-specific element parameters: type designation, accelerator model name, and open property map."
+    slots:
+      - jlab_type
+      - modeled_as
+      - properties
+
+  AnyValue:
+    class_uri: linkml:Any
+    description: "Unconstrained type — accepts any YAML/JSON value (string, number, object, list, etc.)."
+
+enums:
+  DataTypeEnum:
+    description: "Allowed data types for signal values."
+    permissible_values:
+      null:
+        description: >-
+          A special value that may represent an unknown, missing, not applicable, or undefined value.
+        meaning: ncit:C45255
+      int:
+        description: >-
+          A data type comprised of numbers with no fractional part, including negative and positive values.
+        meaning: ncit:C47840
+      float:
+        description: "A number that can have its decimal point in any position."
+        meaning: ncit:C48150
+      double:
+        description: "A 64-bit floating-point value."
+        meaning: ncit:C48870
+      string:
+        description: "A sequence of characters used to represent text."
+        meaning: ncit:C45253
+      boolean:
+        description: "A data type with two possible values: true and false."
+        meaning: ncit:C45254
+      boolean_non_null:
+        description: "A two-value boolean data type that does not include null flavor."
+        meaning: ncit:C95630
+      date:
+        description: "A calendar date (year, month, day)."
+        meaning: ncit:C48871
+      coded_value:
+        description: "A code value referenced from an external coding system or ontology."
+        meaning: ncit:C95637
+
+  RelationshipTypeEnum:
+    description: "Allowed edge labels in the profile-family graph projection."
+    permissible_values:
+      HAS_SHARED_CAPABILITY: {}
+      HAS_TYPE_PROFILE: {}
+      INHERITS_CAPABILITY: {}
+      HAS_TYPE_SPECIFIC_CAPABILITY: {}
+      HAS_SIGNAL: {}
+      IMPLEMENTED_BY: {}
+      BINDS_TO: {}
+      LOCATED_IN: {}
+      CONTROLLED_BY: {}
+
+  ElementKindEnum:
+    description: "Controlled vocabulary for beamline element types."
+    permissible_values:
+      Drift: {}
+      Marker: {}
+      BPM: {}
+      Corrector: {}
+      Dipole: {}
+      Quadrupole: {}
+      Solenoid: {}
+      RFCavity: {}
+      Instrument: {}
+
+slots:
+  narad:
+    range: NaradConfig
+    inlined: true
+
+  schema_version:
+    range: string
+
+  intent:
+    range: string
+
+  facility:
+    range: string
+
+  control_system:
+    range: string
+
+  naming_convention:
+    range: string
+
+  capability_layer:
+    range: CapabilityLayer
+    inlined: true
+
+  profiles:
+    range: ControlProfileFamily
+    multivalued: true
+    inlined: true
+    description: "Control profile families keyed by family name."
+
+  id:
+    identifier: true
+    range: string
+    description: "Unique identifier for the entity."
+
+  inlined_name:
+    identifier: true
+    range: string
+    description: "Name of the beamline."
+    inlined: true
+
+  name:
+    identifier: true
+    range: string
+    description: "Name/identifier of the entity."
+
+  description:
+    range: string
+
+  capability_class:
+    range: string
+    aliases:
+      - class
+    description: >-
+      Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCapability).
+      Serialized as 'class' in source YAML; renamed here to avoid conflict with reserved keywords.
+
+  kind:
+    range: string
+    description: "Kind/type of the profile family or profile instance."
+    aliases:
+      - type
+      - profile_type
+
+  class:
+    range: string
+    description: "Class label used in profile payloads (for example, QuadrupoleStrengthCapability)."
+
+  role:
+    description: "The role of the signal in the control model."
+    range: string
+
+  data_type:
+    description: "The data type of the signal's value."
+    range: DataTypeEnum
+    broad_mappings:
+      - ncit:C42645
+      - qudt:Datatype
+
+  units:
+    description: "Units of measurement or null for unitless values."
+    range: string
+    broad_mappings:
+      - si-unit:Unit
+
+  signals:
+    range: Signal
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    description: "Signals within a capability."
+
+  shared_capabilities:
+    range: Capability
+    multivalued: true
+    inlined: true
+    description: "Named shared capabilities reused by profile types in a family."
+
+  inherits_shared_capabilities:
+    range: string
+    multivalued: true
+    description: "Names of shared capabilities inherited by the profile."
+
+  type_specific_capabilities:
+    range: TypeSpecificCapability
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    description: "Type-specific capabilities declared directly in a profile, each with an id, class label, description, and signals."
+
+  magnet_type_profiles:
+    range: CapabilityProfile
+    multivalued: true
+    inlined: true
+    description: "Magnet profile definitions keyed by profile name."
+
+  instrument_type_profiles:
+    range: CapabilityProfile
+    multivalued: true
+    inlined: true
+    description: "Instrument profile definitions keyed by profile name."
+
+  cavity_type_profiles:
+    range: CapabilityProfile
+    multivalued: true
+    inlined: true
+    description: "RF cavity profile definitions keyed by profile name."
+
+  graph_projection:
+    range: GraphProjection
+    inlined: true
+    description: "Optional graph projection metadata attached to a profile family."
+
+  node_labels:
+    range: NodeLabels
+    inlined: true
+    description: "Node label mapping for the graph projection."
+
+  device:
+    range: string
+  capability_family:
+    range: string
+  profile:
+    range: string
+  capability:
+    range: string
+  signal:
+    range: string
+
+  relationships:
+    range: RelationshipTypeEnum
+    multivalued: true
+    description: "Relationship labels used in graph projection."
+  
+  signal_layer:
+    range: SignalLayer
+    inlined: true
+    description: "Signal-layer container for facility-specific signal bindings."
+
+  facilities:
+    range: Facility
+    multivalued: true
+    inlined: true
+    description: "Facility identifiers for facility-specific signal bindings."
+
+  signal_definitions:
+    range: SignalDefinitions
+    inlined: true
+
+  epics_suffix:
+    range: string
+    description: "Facility-specific EPICS suffix for a semantic signal."
+
+  shared_magnet_signals:
+    range: SignalBinding
+    multivalued: true
+    inlined: true
+    description: "Shared magnet signal definitions keyed by signal name."
+
+  cavity_signals:
+    range: SignalBinding
+    multivalued: true
+    inlined: true
+    description: "Cavity signal definitions keyed by signal name."
+
+  magnet_type_signals:
+    range: DeviceTypeSignalSet
+    multivalued: true
+    inlined: true
+    description: "Magnet-type-specific signal definition groups keyed by device type."
+
+  instrument_type_signals:
+    range: DeviceTypeSignalSet
+    multivalued: true
+    inlined: true
+    description: "Instrument-type-specific signal definition groups keyed by device type."
+
+  signal_bindings:
+    range: SignalBinding
+    multivalued: true
+    inlined: true
+    description: "Signal definitions keyed by signal name within a device type."
+
+  beamlines:
+    range: AnyValue
+    multivalued: true
+    description: "Beamlines — open structure to accommodate the list-of-named-dict serialization format used in NARAD YAML files."
+
+  elements:
+    range: BeamlineElement
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    description: "Beamline element definitions (referenced by name from beamline line sequences)."
+
+  line:
+    range: BeamlineElement
+    multivalued: true
+    inlined: false
+    description: "Ordered sequence of cross-referenced element names forming a beamline."
+
+  length:
+    range: float
+    description: "Physical length of the element in meters."
+
+  RFP:
+    range: RFParams
+    inlined: true
+    description: "RF cavity physics parameters block."
+
+  BendP:
+    range: BendParams
+    inlined: true
+    description: "Dipole/bend physics parameters block."
+
+  MagneticMultipoleP:
+    range: MagneticMultipoleParams
+    inlined: true
+    description: "Magnetic multipole physics parameters block."
+
+  SolenoidP:
+    range: SolenoidParams
+    inlined: true
+    description: "Solenoid physics parameters block."
+
+  JLabP:
+    range: JLabParams
+    inlined: true
+    description: "JLab-specific element parameters block."
+
+  capability_profile_family:
+    range: ControlProfileFamily
+    inlined: false
+    description: "Cross-reference to the control profile family for this element."
+
+  capability_profile:
+    range: CapabilityProfile
+    inlined: false
+    description: "Cross-reference to the specific capability profile applied to this element."
+
+  magnet_semantics:
+    range: ElementSemantics
+    inlined: true
+    description: "Magnet-domain semantic context for this element."
+
+  instrument_semantics:
+    range: ElementSemantics
+    inlined: true
+    description: "Instrument-domain semantic context for this element."
+
+  cavity_semantics:
+    range: ElementSemantics
+    inlined: true
+    description: "RF-cavity-domain semantic context for this element."
+
+  pv:
+    range: string
+    description: "The EPICS Process Variable name (e.g. MBHK101H.S)."
+
+  frequency:
+    range: float
+    description: "RF frequency in Hz."
+
+  voltage:
+    range: float
+    description: "RF voltage in volts."
+
+  phase:
+    range: float
+    description: "RF phase in degrees."
+
+  angle_ref:
+    range: float
+    description: "Reference bend angle in radians."
+
+  e1:
+    range: float
+    description: "Entry edge angle in radians."
+
+  e2:
+    range: float
+    description: "Exit edge angle in radians."
+
+  Kn1:
+    range: float
+    description: "First-order magnetic multipole coefficient (quadrupole strength)."
+
+  Ksol:
+    range: float
+    description: "Solenoid integrated field strength."
+
+  jlab_type:
+    range: string
+    aliases:
+      - type
+    description: >-
+      JLab-specific element type designation (e.g. WarmCavity, QW, HCorrector).
+      Serialized as 'type' in source YAML; renamed here to avoid conflict with the
+      LinkML metamodel 'type' designator used for polymorphic class selection.
+
+  modeled_as:
+    range: string
+    description: "Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK)."
+
+  properties:
+    range: AnyValue
+    description: "Open-ended key-value property map for element-specific parameters."
+
+
+
+
+

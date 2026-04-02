@@ -1,0 +1,237 @@
+# metamodel_version: 1.7.0
+# version: 0.1.0
+enum DataTypeEnum
+  {
+    None
+    int
+    float
+    double
+    string
+    boolean
+    boolean_non_null
+    date
+    coded_value
+  }
+
+enum ElementKindEnum
+  {
+    Drift
+    Marker
+    BPM
+    Corrector
+    Dipole
+    Quadrupole
+    Solenoid
+    RFCavity
+    Instrument
+  }
+
+enum RelationshipTypeEnum
+  {
+    HAS_SHARED_CAPABILITY
+    HAS_TYPE_PROFILE
+    INHERITS_CAPABILITY
+    HAS_TYPE_SPECIFIC_CAPABILITY
+    HAS_SIGNAL
+    IMPLEMENTED_BY
+    BINDS_TO
+    LOCATED_IN
+    CONTROLLED_BY
+  }
+
+type Beamline
+  {
+    name: String!
+    kind: String
+    line: [BeamlineElement]
+  }
+
+type BeamlineElement
+  {
+    name: String!
+    kind: ElementKindEnum
+    length: Float
+    rFP: RFParams
+    bendP: BendParams
+    magneticMultipoleP: MagneticMultipoleParams
+    solenoidP: SolenoidParams
+    narad: ElementNaradRef
+    jLabP: JLabParams
+  }
+
+type BendParams
+  {
+    angleRef: Float
+    e1: Float
+    e2: Float
+  }
+
+type Capability
+  {
+    name: String!
+    description: String
+    signals: [Signal]
+  }
+
+type CapabilityLayer
+  {
+    profiles: [ControlProfileFamily]
+  }
+
+type CapabilityProfile
+  {
+    name: String!
+    kind: String
+    description: String
+    inheritsSharedCapabilities: [String]
+    typeSpecificCapabilities: [TypeSpecificCapability]
+  }
+
+type ControlProfileFamily
+  {
+    name: String!
+    kind: String
+    description: String
+    sharedCapabilities: [Capability]
+    magnetTypeProfiles: [CapabilityProfile]
+    instrumentTypeProfiles: [CapabilityProfile]
+    cavityTypeProfiles: [CapabilityProfile]
+    graphProjection: GraphProjection
+  }
+
+type DeviceTypeSignalSet
+  {
+    name: String!
+    signalBindings: [SignalBinding]
+  }
+
+type ElementNaradRef
+  {
+    capabilityProfileFamily: ControlProfileFamily
+    capabilityProfile: CapabilityProfile
+    magnetSemantics: ElementSemantics
+    instrumentSemantics: ElementSemantics
+    cavitySemantics: ElementSemantics
+    signalBindings: [PVBinding]
+  }
+
+type ElementSemantics
+  {
+    sharedCapabilities: [Capability]
+    typeSpecificCapabilities: [TypeSpecificCapability]
+  }
+
+type Facility
+  {
+    name: String!
+    controlSystem: String
+    namingConvention: String
+    signalDefinitions: SignalDefinitions
+  }
+
+type GraphProjection
+  {
+    nodeLabels: NodeLabels
+    relationships: [RelationshipTypeEnum]
+  }
+
+type JLabParams
+  {
+    jlabType: String
+    modeledAs: String
+    properties: [KeyValuePair]
+  }
+
+type KeyValuePair
+  {
+    name: String!
+    value: String
+  }
+
+type MagneticMultipoleParams
+  {
+    kn1: Float
+  }
+
+type NaradConfig
+  {
+    schemaVersion: String
+    intent: String
+    capabilityLayer: CapabilityLayer
+    facility: String
+    controlSystem: String
+    signalLayer: SignalLayer
+  }
+
+type NaradModel
+  {
+    narad: NaradConfig
+    beamlines: [Beamline]
+    elements: [BeamlineElement]
+  }
+
+type NodeLabels
+  {
+    device: String
+    capabilityFamily: String
+    profile: String
+    capability: String
+    signal: String
+  }
+
+type PVBinding
+  {
+    name: String!
+    facility: String
+    controlSystem: String
+    pv: String
+  }
+
+type RFParams
+  {
+    frequency: Float
+    voltage: Float
+    phase: Float
+  }
+
+type Signal
+  {
+    name: String!
+    role: String
+    dataType: DataTypeEnum
+    units: String
+    description: String
+  }
+
+type SignalBinding
+  {
+    name: String!
+    epicsSuffix: String
+    description: String
+  }
+
+type SignalDefinitions
+  {
+    sharedMagnetSignals: [SignalBinding]
+    magnetTypeSignals: [DeviceTypeSignalSet]
+    instrumentTypeSignals: [DeviceTypeSignalSet]
+    cavitySignals: [SignalBinding]
+  }
+
+type SignalLayer
+  {
+    facilities: [Facility]
+  }
+
+type SolenoidParams
+  {
+    ksol: Float
+  }
+
+type TypeSpecificCapability
+  {
+    id: String!
+    capabilityClass: String
+    description: String
+    signals: [Signal]
+  }

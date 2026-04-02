@@ -1,0 +1,1546 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix ncit: <http://purl.obolibrary.org/obo/NCIT_> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix si-unit: <http://qudt.org/vocab/unit/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/NaradModel> a owl:Class ;
+    rdfs:label "NaradModel" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/beamlines> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/Beamline> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/beamlines> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/NaradConfig> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/narad> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/narad> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/elements> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/elements> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/narad> ],
+        linkml:ClassDefinition ;
+    skos:definition "Top-level NARAD document container." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/class> a owl:DatatypeProperty ;
+    rdfs:label "class" ;
+    rdfs:range xsd:string ;
+    skos:definition "Class label used in profile payloads (for example, QuadrupoleStrengthCapability)." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/ElementNaradRef> a owl:Class ;
+    rdfs:label "ElementNaradRef" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/cavity_semantics> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/instrument_semantics> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_profile> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/magnet_semantics> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_profile> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/PVBinding> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/instrument_semantics> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/magnet_semantics> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_profile_family> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_profile_family> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/magnet_semantics> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/cavity_semantics> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/instrument_semantics> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_profile> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_profile_family> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/cavity_semantics> ],
+        linkml:ClassDefinition ;
+    skos:definition "NARAD semantic reference block attached to a beamline element." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/PVBinding> a owl:Class ;
+    rdfs:label "PVBinding" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/pv> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/pv> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/facility> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/facility> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/facility> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/pv> ],
+        linkml:ClassDefinition ;
+    skos:definition "A concrete PV (Process Variable) binding for one semantic signal on a beamline element." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+ncit:C45253 a owl:Class ;
+    rdfs:label "string" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:definition "A sequence of characters used to represent text." .
+
+ncit:C45254 a owl:Class ;
+    rdfs:label "boolean" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:definition "A data type with two possible values: true and false." .
+
+ncit:C45255 a owl:Class ;
+    rdfs:label "None" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:definition "A special value that may represent an unknown, missing, not applicable, or undefined value." .
+
+ncit:C47840 a owl:Class ;
+    rdfs:label "int" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:definition "A data type comprised of numbers with no fractional part, including negative and positive values." .
+
+ncit:C48150 a owl:Class ;
+    rdfs:label "float" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:definition "A number that can have its decimal point in any position." .
+
+ncit:C48870 a owl:Class ;
+    rdfs:label "double" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:definition "A 64-bit floating-point value." .
+
+ncit:C48871 a owl:Class ;
+    rdfs:label "date" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:definition "A calendar date (year, month, day)." .
+
+ncit:C95630 a owl:Class ;
+    rdfs:label "boolean_non_null" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:definition "A two-value boolean data type that does not include null flavor." .
+
+ncit:C95637 a owl:Class ;
+    rdfs:label "coded_value" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:definition "A code value referenced from an external coding system or ontology." .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#BPM> a owl:Class ;
+    rdfs:label "BPM" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Corrector> a owl:Class ;
+    rdfs:label "Corrector" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Dipole> a owl:Class ;
+    rdfs:label "Dipole" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Drift> a owl:Class ;
+    rdfs:label "Drift" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Instrument> a owl:Class ;
+    rdfs:label "Instrument" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Marker> a owl:Class ;
+    rdfs:label "Marker" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Quadrupole> a owl:Class ;
+    rdfs:label "Quadrupole" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#RFCavity> a owl:Class ;
+    rdfs:label "RFCavity" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Solenoid> a owl:Class ;
+    rdfs:label "Solenoid" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#BINDS_TO> a owl:Class ;
+    rdfs:label "BINDS_TO" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#CONTROLLED_BY> a owl:Class ;
+    rdfs:label "CONTROLLED_BY" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_SHARED_CAPABILITY> a owl:Class ;
+    rdfs:label "HAS_SHARED_CAPABILITY" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_SIGNAL> a owl:Class ;
+    rdfs:label "HAS_SIGNAL" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_TYPE_PROFILE> a owl:Class ;
+    rdfs:label "HAS_TYPE_PROFILE" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_TYPE_SPECIFIC_CAPABILITY> a owl:Class ;
+    rdfs:label "HAS_TYPE_SPECIFIC_CAPABILITY" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#IMPLEMENTED_BY> a owl:Class ;
+    rdfs:label "IMPLEMENTED_BY" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#INHERITS_CAPABILITY> a owl:Class ;
+    rdfs:label "INHERITS_CAPABILITY" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#LOCATED_IN> a owl:Class ;
+    rdfs:label "LOCATED_IN" ;
+    rdfs:subClassOf linkml:PermissibleValue,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/Beamline> a owl:Class ;
+    rdfs:label "Beamline" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/line> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/line> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        linkml:ClassDefinition ;
+    skos:definition "An ordered sequence of beamline elements defining a beam path." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/BendParams> a owl:Class ;
+    rdfs:label "BendParams" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/e2> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/e2> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/e2> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/e1> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/e1> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/angle_ref> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/angle_ref> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/e1> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/angle_ref> ],
+        linkml:ClassDefinition ;
+    skos:definition "Dipole/bend physics parameters (entry angle, exit edge angles)." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/CapabilityLayer> a owl:Class ;
+    rdfs:label "CapabilityLayer" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/profiles> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/profiles> ],
+        linkml:ClassDefinition ;
+    skos:definition "Capability-layer container for profile families." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/Facility> a owl:Class ;
+    rdfs:label "Facility" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/naming_convention> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/naming_convention> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/naming_convention> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_definitions> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_definitions> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/SignalDefinitions> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_definitions> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ],
+        linkml:ClassDefinition ;
+    skos:definition "A facility with specific signal bindings." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/GraphProjection> a owl:Class ;
+    rdfs:label "GraphProjection" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/node_labels> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/relationships> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/node_labels> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/relationships> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/NodeLabels> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/node_labels> ],
+        linkml:ClassDefinition ;
+    skos:definition "Graph projection metadata for node labels and edge categories." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/JLabParams> a owl:Class ;
+    rdfs:label "JLabParams" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/jlab_type> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/jlab_type> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/modeled_as> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/modeled_as> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/modeled_as> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/jlab_type> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/KeyValuePair> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/properties> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/properties> ],
+        linkml:ClassDefinition ;
+    skos:definition "JLab-specific element parameters: type designation, accelerator model name, and open property map." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/KeyValuePair> a owl:Class ;
+    rdfs:label "KeyValuePair" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/value> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/value> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/value> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        linkml:ClassDefinition ;
+    skos:definition "A generic key-value pair for open-ended property maps." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleParams> a owl:Class ;
+    rdfs:label "MagneticMultipoleParams" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kn1> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kn1> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kn1> ],
+        linkml:ClassDefinition ;
+    skos:definition "Magnetic multipole physics parameters." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/NaradConfig> a owl:Class ;
+    rdfs:label "NaradConfig" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/intent> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/facility> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_layer> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/facility> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/schema_version> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/schema_version> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityLayer> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_layer> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_layer> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/intent> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/intent> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_layer> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/schema_version> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/facility> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_layer> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/SignalLayer> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_layer> ],
+        linkml:ClassDefinition ;
+    skos:definition "NARAD configuration block containing the capability layer." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/NodeLabels> a owl:Class ;
+    rdfs:label "NodeLabels" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/profile> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/device> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_family> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/profile> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_family> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/profile> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/device> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/device> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_family> ],
+        linkml:ClassDefinition ;
+    skos:definition "Labels used when projecting the profile model into a graph view." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/RFParams> a owl:Class ;
+    rdfs:label "RFParams" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/frequency> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/voltage> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/phase> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/voltage> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/frequency> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/voltage> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/frequency> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/phase> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/phase> ],
+        linkml:ClassDefinition ;
+    skos:definition "RF cavity physics parameters (frequency, voltage, phase)." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/SignalDefinitions> a owl:Class ;
+    rdfs:label "SignalDefinitions" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/shared_magnet_signals> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/cavity_signals> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_signals> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/shared_magnet_signals> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/cavity_signals> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_signals> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_signals> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_signals> ],
+        linkml:ClassDefinition ;
+    skos:definition "Grouped EPICS signal suffix templates by semantic category." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/SignalLayer> a owl:Class ;
+    rdfs:label "SignalLayer" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/Facility> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/facilities> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/facilities> ],
+        linkml:ClassDefinition ;
+    skos:definition "Signal-layer container for facility-specific signal bindings." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/SolenoidParams> a owl:Class ;
+    rdfs:label "SolenoidParams" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/ksol> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/ksol> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/ksol> ],
+        linkml:ClassDefinition ;
+    skos:definition "Solenoid physics parameters." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/beamlines> a owl:ObjectProperty ;
+    rdfs:label "beamlines" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/Beamline> ;
+    skos:definition "Ordered list of beamlines in this NARAD document." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/cavity_signals> a owl:ObjectProperty ;
+    rdfs:label "cavity_signals" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> ;
+    skos:definition "Cavity signal definitions keyed by signal name." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/cavity_type_profiles> a owl:ObjectProperty ;
+    rdfs:label "cavity_type_profiles" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+    skos:definition "RF cavity profile definitions keyed by profile name." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/elements> a owl:ObjectProperty ;
+    rdfs:label "elements" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement> ;
+    skos:definition "Beamline element definitions (referenced by name from beamline line sequences)." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/facilities> a owl:ObjectProperty ;
+    rdfs:label "facilities" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/Facility> ;
+    skos:definition "Facility identifiers for facility-specific signal bindings." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/inherits_shared_capabilities> a owl:DatatypeProperty ;
+    rdfs:label "inherits_shared_capabilities" ;
+    rdfs:range xsd:string ;
+    skos:definition "Names of shared capabilities inherited by the profile." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_profiles> a owl:ObjectProperty ;
+    rdfs:label "instrument_type_profiles" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+    skos:definition "Instrument profile definitions keyed by profile name." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_signals> a owl:ObjectProperty ;
+    rdfs:label "instrument_type_signals" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet> ;
+    skos:definition "Instrument-type-specific signal definition groups keyed by device type." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/line> a owl:ObjectProperty ;
+    rdfs:label "line" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement> ;
+    skos:definition "Ordered sequence of cross-referenced element names forming a beamline." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_profiles> a owl:ObjectProperty ;
+    rdfs:label "magnet_type_profiles" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+    skos:definition "Magnet profile definitions keyed by profile name." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_signals> a owl:ObjectProperty ;
+    rdfs:label "magnet_type_signals" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet> ;
+    skos:definition "Magnet-type-specific signal definition groups keyed by device type." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/profiles> a owl:ObjectProperty ;
+    rdfs:label "profiles" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily> ;
+    skos:definition "Control profile families keyed by family name." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/properties> a owl:ObjectProperty ;
+    rdfs:label "properties" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/KeyValuePair> ;
+    skos:definition "Open-ended key-value property map for element-specific parameters." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/relationships> a owl:ObjectProperty ;
+    rdfs:label "relationships" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> ;
+    skos:definition "Relationship labels used in graph projection." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/shared_magnet_signals> a owl:ObjectProperty ;
+    rdfs:label "shared_magnet_signals" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> ;
+    skos:definition "Shared magnet signal definitions keyed by signal name." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/BendP> a owl:ObjectProperty ;
+    rdfs:label "BendP" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/BendParams> ;
+    skos:definition "Dipole/bend physics parameters block." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/Capability> a owl:Class ;
+    rdfs:label "Capability" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/Signal> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signals> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signals> ],
+        linkml:ClassDefinition ;
+    skos:definition "A grouping of related signals for a control aspect." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/JLabP> a owl:ObjectProperty ;
+    rdfs:label "JLabP" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/JLabParams> ;
+    skos:definition "JLab-specific element parameters block." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleP> a owl:ObjectProperty ;
+    rdfs:label "MagneticMultipoleP" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleParams> ;
+    skos:definition "Magnetic multipole physics parameters block." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/RFP> a owl:ObjectProperty ;
+    rdfs:label "RFP" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/RFParams> ;
+    skos:definition "RF cavity physics parameters block." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/Signal> a owl:Class ;
+    rdfs:label "Signal" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/role> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/units> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/data_type> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/units> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/data_type> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/role> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/role> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/units> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/data_type> ],
+        linkml:ClassDefinition ;
+    skos:altLabel "EPICS Process Variable",
+        "epics_pv",
+        "process_variable",
+        "pv" ;
+    skos:broadMatch qudt:QuantityKind ;
+    skos:definition "A named semantic signal used by a capability." ;
+    skos:exactMatch sosa:ObservableProperty ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/SolenoidP> a owl:ObjectProperty ;
+    rdfs:label "SolenoidP" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/SolenoidParams> ;
+    skos:definition "Solenoid physics parameters block." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability> a owl:Class ;
+    rdfs:label "TypeSpecificCapability" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_class> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_class> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/id> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/Signal> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signals> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/id> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/capability_class> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/id> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signals> ],
+        linkml:ClassDefinition ;
+    skos:definition "An inline capability declared within a device-type profile, with its own identifier, a semantic class label, a description, and a list of signals. Distinct from the shared capabilities referenced by name; these are profile-local definitions." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/angle_ref> a owl:DatatypeProperty ;
+    rdfs:label "angle_ref" ;
+    rdfs:range xsd:float ;
+    skos:definition "Reference bend angle in radians." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/capability> a owl:DatatypeProperty ;
+    rdfs:label "capability" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/capability_class> a owl:DatatypeProperty ;
+    rdfs:label "capability_class" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "class" ;
+    skos:definition "Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCapability). Serialized as 'class' in source YAML; renamed here to avoid conflict with reserved keywords." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/capability_family> a owl:DatatypeProperty ;
+    rdfs:label "capability_family" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/capability_layer> a owl:ObjectProperty ;
+    rdfs:label "capability_layer" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityLayer> ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/capability_profile> a owl:ObjectProperty ;
+    rdfs:label "capability_profile" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+    skos:definition "Cross-reference to the specific capability profile applied to this element." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/capability_profile_family> a owl:ObjectProperty ;
+    rdfs:label "capability_profile_family" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily> ;
+    skos:definition "Cross-reference to the control profile family for this element." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/cavity_semantics> a owl:ObjectProperty ;
+    rdfs:label "cavity_semantics" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> ;
+    skos:definition "RF-cavity-domain semantic context for this element." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/data_type> a owl:ObjectProperty ;
+    rdfs:label "data_type" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> ;
+    skos:broadMatch ncit:C42645,
+        qudt:Datatype ;
+    skos:definition "The data type of the signal's value." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/device> a owl:DatatypeProperty ;
+    rdfs:label "device" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/e1> a owl:DatatypeProperty ;
+    rdfs:label "e1" ;
+    rdfs:range xsd:float ;
+    skos:definition "Entry edge angle in radians." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/e2> a owl:DatatypeProperty ;
+    rdfs:label "e2" ;
+    rdfs:range xsd:float ;
+    skos:definition "Exit edge angle in radians." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/epics_suffix> a owl:DatatypeProperty ;
+    rdfs:label "epics_suffix" ;
+    rdfs:range xsd:string ;
+    skos:definition "Facility-specific EPICS suffix for a semantic signal." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/frequency> a owl:DatatypeProperty ;
+    rdfs:label "frequency" ;
+    rdfs:range xsd:float ;
+    skos:definition "RF frequency in Hz." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/graph_projection> a owl:ObjectProperty ;
+    rdfs:label "graph_projection" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/GraphProjection> ;
+    skos:definition "Optional graph projection metadata attached to a profile family." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/id> a owl:DatatypeProperty ;
+    rdfs:label "id" ;
+    rdfs:range xsd:string ;
+    skos:definition "Unique identifier for the entity." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/instrument_semantics> a owl:ObjectProperty ;
+    rdfs:label "instrument_semantics" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> ;
+    skos:definition "Instrument-domain semantic context for this element." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/intent> a owl:DatatypeProperty ;
+    rdfs:label "intent" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/jlab_type> a owl:DatatypeProperty ;
+    rdfs:label "jlab_type" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "type" ;
+    skos:definition "JLab-specific element type designation (e.g. WarmCavity, QW, HCorrector). Serialized as 'type' in source YAML; renamed here to avoid conflict with the LinkML metamodel 'type' designator used for polymorphic class selection." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/kn1> a owl:DatatypeProperty ;
+    rdfs:label "kn1" ;
+    rdfs:range xsd:float ;
+    skos:definition "First-order magnetic multipole coefficient (quadrupole strength)." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/ksol> a owl:DatatypeProperty ;
+    rdfs:label "ksol" ;
+    rdfs:range xsd:float ;
+    skos:definition "Solenoid integrated field strength." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/length> a owl:DatatypeProperty ;
+    rdfs:label "length" ;
+    rdfs:range xsd:float ;
+    skos:definition "Physical length of the element in meters." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/magnet_semantics> a owl:ObjectProperty ;
+    rdfs:label "magnet_semantics" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> ;
+    skos:definition "Magnet-domain semantic context for this element." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/modeled_as> a owl:DatatypeProperty ;
+    rdfs:label "modeled_as" ;
+    rdfs:range xsd:string ;
+    skos:definition "Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK)." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/naming_convention> a owl:DatatypeProperty ;
+    rdfs:label "naming_convention" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/node_labels> a owl:ObjectProperty ;
+    rdfs:label "node_labels" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/NodeLabels> ;
+    skos:definition "Node label mapping for the graph projection." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/phase> a owl:DatatypeProperty ;
+    rdfs:label "phase" ;
+    rdfs:range xsd:float ;
+    skos:definition "RF phase in degrees." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/profile> a owl:DatatypeProperty ;
+    rdfs:label "profile" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/pv> a owl:DatatypeProperty ;
+    rdfs:label "pv" ;
+    rdfs:range xsd:string ;
+    skos:definition "The EPICS Process Variable name (e.g. MBHK101H.S)." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/role> a owl:DatatypeProperty ;
+    rdfs:label "role" ;
+    rdfs:range xsd:string ;
+    skos:definition "The role of the signal in the control model." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/schema_version> a owl:DatatypeProperty ;
+    rdfs:label "schema_version" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/signal> a owl:DatatypeProperty ;
+    rdfs:label "signal" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/signal_definitions> a owl:ObjectProperty ;
+    rdfs:label "signal_definitions" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/SignalDefinitions> ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/signal_layer> a owl:ObjectProperty ;
+    rdfs:label "signal_layer" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/SignalLayer> ;
+    skos:definition "Signal-layer container for facility-specific signal bindings." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/units> a owl:DatatypeProperty ;
+    rdfs:label "units" ;
+    rdfs:range xsd:string ;
+    skos:broadMatch si-unit:Unit ;
+    skos:definition "Units of measurement or null for unitless values." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/value> a owl:DatatypeProperty ;
+    rdfs:label "value" ;
+    rdfs:range xsd:string ;
+    skos:definition "Property value as a string." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/voltage> a owl:DatatypeProperty ;
+    rdfs:label "voltage" ;
+    rdfs:range xsd:float ;
+    skos:definition "RF voltage in volts." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement> a owl:Class ;
+    rdfs:label "BeamlineElement" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/length> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/BendParams> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/BendP> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleP> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/SolenoidP> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/narad> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/BendP> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/length> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/JLabP> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/BendP> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/JLabP> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/RFP> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/JLabParams> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/JLabP> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/narad> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleP> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/RFParams> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/RFP> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/SolenoidParams> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/SolenoidP> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/RFP> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleParams> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleP> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/ElementNaradRef> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/narad> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/SolenoidP> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/length> ],
+        linkml:ClassDefinition ;
+    skos:definition "A single element in a beamline with optional physics parameter blocks." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily> a owl:Class ;
+    rdfs:label "ControlProfileFamily" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_profiles> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_profiles> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/graph_projection> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/GraphProjection> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/graph_projection> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/Capability> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/graph_projection> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_profiles> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_profiles> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/cavity_type_profiles> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/cavity_type_profiles> ],
+        linkml:ClassDefinition ;
+    skos:altLabel "capability_profile_family",
+        "control_profile_family" ;
+    skos:definition "A reusable family of control profiles sharing common semantics and structure." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet> a owl:Class ;
+    rdfs:label "DeviceTypeSignalSet" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        linkml:ClassDefinition ;
+    skos:definition "Signal binding set scoped to a device type (for example, Quadrupole or BPM)." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities> a owl:ObjectProperty ;
+    rdfs:label "shared_capabilities" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/Capability> ;
+    skos:definition "Named shared capabilities reused by profile types in a family.",
+        "Names of shared capabilities applied to this element, referencing Capability by name." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings> a owl:ObjectProperty ;
+    rdfs:label "signal_bindings" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> ;
+    skos:definition "Signal definitions keyed by signal name within a device type." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/signals> a owl:ObjectProperty ;
+    rdfs:label "signals" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/Signal> ;
+    skos:definition "Signals within a capability." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities> a owl:ObjectProperty ;
+    rdfs:label "type_specific_capabilities" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability> ;
+    skos:definition "Capability class labels (e.g. CorrectorKickCapability) identifying which type-specific capabilities apply to this element. These match the capability_class field of TypeSpecificCapability entries in the profile.",
+        "Type-specific capabilities declared directly in a profile, each with an id, class label, description, and signals." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> a owl:Class ;
+    rdfs:label "ElementSemantics" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/Capability> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities> ],
+        linkml:ClassDefinition ;
+    skos:definition "Semantic context referencing shared and type-specific capability names for a beamline element." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> a owl:Class ;
+    rdfs:label "SignalBinding" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/epics_suffix> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/epics_suffix> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/epics_suffix> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        linkml:ClassDefinition ;
+    skos:definition "A named EPICS suffix definition for one semantic signal." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/facility> a owl:DatatypeProperty ;
+    rdfs:label "facility" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/narad> a owl:ObjectProperty ;
+    rdfs:label "narad" ;
+    rdfs:range <https://w3id.org/narad_linkml/schema/narad/schema/NaradConfig> ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> a owl:Class ;
+    rdfs:label "CapabilityProfile" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability> ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities> ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/inherits_shared_capabilities> ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty <https://w3id.org/narad_linkml/schema/narad/schema/inherits_shared_capabilities> ],
+        linkml:ClassDefinition ;
+    skos:definition "A device-type profile that reuses shared capabilities and adds specific capabilities." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/control_system> a owl:DatatypeProperty ;
+    rdfs:label "control_system" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum> a owl:Class ;
+    rdfs:label "ElementKindEnum" ;
+    rdfs:subClassOf linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Drift> <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Marker> <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#BPM> <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Corrector> <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Dipole> <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Quadrupole> <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Solenoid> <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#RFCavity> <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Instrument> ) ;
+    skos:definition "Controlled vocabulary for beamline element types." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> ;
+    linkml:permissible_values <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#BPM>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Corrector>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Dipole>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Drift>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Instrument>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Marker>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Quadrupole>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#RFCavity>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:ElementKindEnum#Solenoid> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:DataTypeEnum> a owl:Class ;
+    rdfs:label "DataTypeEnum" ;
+    rdfs:subClassOf linkml:EnumDefinition ;
+    owl:unionOf ( ncit:C45255 ncit:C47840 ncit:C48150 ncit:C48870 ncit:C45253 ncit:C45254 ncit:C95630 ncit:C48871 ncit:C95637 ) ;
+    skos:definition "Allowed data types for signal values." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> ;
+    linkml:permissible_values ncit:C45253,
+        ncit:C45254,
+        ncit:C45255,
+        ncit:C47840,
+        ncit:C48150,
+        ncit:C48870,
+        ncit:C48871,
+        ncit:C95630,
+        ncit:C95637 .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum> a owl:Class ;
+    rdfs:label "RelationshipTypeEnum" ;
+    rdfs:subClassOf linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_SHARED_CAPABILITY> <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_TYPE_PROFILE> <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#INHERITS_CAPABILITY> <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_TYPE_SPECIFIC_CAPABILITY> <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_SIGNAL> <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#IMPLEMENTED_BY> <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#BINDS_TO> <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#LOCATED_IN> <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#CONTROLLED_BY> ) ;
+    skos:definition "Allowed edge labels in the profile-family graph projection." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> ;
+    linkml:permissible_values <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#BINDS_TO>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#CONTROLLED_BY>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_SHARED_CAPABILITY>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_SIGNAL>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_TYPE_PROFILE>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#HAS_TYPE_SPECIFIC_CAPABILITY>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#IMPLEMENTED_BY>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#INHERITS_CAPABILITY>,
+        <https://w3id.org/narad_linkml/schema/narad/schema/:RelationshipTypeEnum#LOCATED_IN> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/kind> a owl:DatatypeProperty ;
+    rdfs:label "kind" ;
+    rdfs:range xsd:string ;
+    skos:altLabel "profile_type",
+        "type" ;
+    skos:definition "Kind/type of the profile family or profile instance." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/description> a owl:DatatypeProperty ;
+    rdfs:label "description" ;
+    rdfs:range xsd:string ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/name> a owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Name/identifier of the entity." ;
+    skos:inScheme <https://w3id.org/narad_linkml/schema/narad/schema> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema> a owl:Ontology ;
+    rdfs:label "narad" ;
+    dcterms:license "CC-BY-4.0" ;
+    pav:version "0.1.0" ;
+    skos:definition "NARAD extension for capability-layer semantics and facility-specific signal bindings" .
+

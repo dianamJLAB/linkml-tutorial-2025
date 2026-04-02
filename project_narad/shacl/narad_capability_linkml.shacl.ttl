@@ -1,0 +1,681 @@
+@prefix ncit: <http://purl.obolibrary.org/obo/NCIT_> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/NaradModel> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Top-level NARAD document container." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement> ;
+            sh:description "Beamline element definitions (referenced by name from beamline line sequences)." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/elements> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/Beamline> ;
+            sh:description "Ordered list of beamlines in this NARAD document." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/beamlines> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/NaradConfig> ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/narad> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/NaradModel> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/Beamline> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "An ordered sequence of beamline elements defining a beam path." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Kind/type of the profile family or profile instance." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement> ;
+            sh:description "Ordered sequence of cross-referenced element names forming a beamline." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/line> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/Beamline> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/BendParams> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Dipole/bend physics parameters (entry angle, exit edge angles)." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "Reference bend angle in radians." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/angle_ref> ],
+        [ sh:datatype xsd:float ;
+            sh:description "Exit edge angle in radians." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/e2> ],
+        [ sh:datatype xsd:float ;
+            sh:description "Entry edge angle in radians." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/e1> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/BendParams> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/CapabilityLayer> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Capability-layer container for profile families." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily> ;
+            sh:description "Control profile families keyed by family name." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/profiles> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityLayer> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/ElementNaradRef> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "NARAD semantic reference block attached to a beamline element." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+            sh:description "Cross-reference to the specific capability profile applied to this element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/capability_profile> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/PVBinding> ;
+            sh:description "Signal definitions keyed by signal name within a device type." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> ;
+            sh:description "Instrument-domain semantic context for this element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/instrument_semantics> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> ;
+            sh:description "RF-cavity-domain semantic context for this element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/cavity_semantics> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily> ;
+            sh:description "Cross-reference to the control profile family for this element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/capability_profile_family> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> ;
+            sh:description "Magnet-domain semantic context for this element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/magnet_semantics> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/ElementNaradRef> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/Facility> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A facility with specific signal bindings." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/naming_convention> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/SignalDefinitions> ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/signal_definitions> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/Facility> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/GraphProjection> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Graph projection metadata for node labels and edge categories." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "Relationship labels used in graph projection." ;
+            sh:in ( "HAS_SHARED_CAPABILITY" "HAS_TYPE_PROFILE" "INHERITS_CAPABILITY" "HAS_TYPE_SPECIFIC_CAPABILITY" "HAS_SIGNAL" "IMPLEMENTED_BY" "BINDS_TO" "LOCATED_IN" "CONTROLLED_BY" ) ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/relationships> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/NodeLabels> ;
+            sh:description "Node label mapping for the graph projection." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/node_labels> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/GraphProjection> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/JLabParams> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "JLab-specific element parameters: type designation, accelerator model name, and open property map." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/KeyValuePair> ;
+            sh:description "Open-ended key-value property map for element-specific parameters." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/properties> ],
+        [ sh:datatype xsd:string ;
+            sh:description "JLab-specific element type designation (e.g. WarmCavity, QW, HCorrector). Serialized as 'type' in source YAML; renamed here to avoid conflict with the LinkML metamodel 'type' designator used for polymorphic class selection." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/jlab_type> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Accelerator physics code model element type (e.g. RFCA, KQUAD, HKICK)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/modeled_as> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/JLabParams> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/KeyValuePair> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A generic key-value pair for open-ended property maps." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Property value as a string." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/value> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/KeyValuePair> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleParams> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Magnetic multipole physics parameters." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "First-order magnetic multipole coefficient (quadrupole strength)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/kn1> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleParams> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/NaradConfig> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "NARAD configuration block containing the capability layer." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/SignalLayer> ;
+            sh:description "Signal-layer container for facility-specific signal bindings." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/signal_layer> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/schema_version> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/intent> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityLayer> ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/capability_layer> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/facility> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/NaradConfig> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/NodeLabels> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Labels used when projecting the profile model into a graph view." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/signal> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/capability_family> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/profile> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/capability> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/device> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/NodeLabels> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/PVBinding> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A concrete PV (Process Variable) binding for one semantic signal on a beamline element." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "The EPICS Process Variable name (e.g. MBHK101H.S)." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/pv> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/facility> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/control_system> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/PVBinding> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/RFParams> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "RF cavity physics parameters (frequency, voltage, phase)." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "RF frequency in Hz." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/frequency> ],
+        [ sh:datatype xsd:float ;
+            sh:description "RF voltage in volts." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/voltage> ],
+        [ sh:datatype xsd:float ;
+            sh:description "RF phase in degrees." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/phase> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/RFParams> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/SignalDefinitions> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Grouped EPICS signal suffix templates by semantic category." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet> ;
+            sh:description "Magnet-type-specific signal definition groups keyed by device type." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_signals> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> ;
+            sh:description "Cavity signal definitions keyed by signal name." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/cavity_signals> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> ;
+            sh:description "Shared magnet signal definitions keyed by signal name." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/shared_magnet_signals> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet> ;
+            sh:description "Instrument-type-specific signal definition groups keyed by device type." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_signals> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/SignalDefinitions> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/SignalLayer> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Signal-layer container for facility-specific signal bindings." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/Facility> ;
+            sh:description "Facility identifiers for facility-specific signal bindings." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/facilities> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/SignalLayer> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/SolenoidParams> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Solenoid physics parameters." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "Solenoid integrated field strength." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/ksol> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/SolenoidParams> .
+
+sosa:ObservableProperty a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A named semantic signal used by a capability." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ sh:datatype xsd:string ;
+            sh:description "The role of the signal in the control model." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/role> ],
+        [ sh:description "The data type of the signal's value." ;
+            sh:in ( ncit:C45255 ncit:C47840 ncit:C48150 ncit:C48870 ncit:C45253 ncit:C45254 ncit:C95630 ncit:C48871 ncit:C95637 ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/data_type> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Units of measurement or null for unitless values." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/units> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ] ;
+    sh:targetClass sosa:ObservableProperty .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A single element in a beamline with optional physics parameter blocks." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/JLabParams> ;
+            sh:description "JLab-specific element parameters block." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/JLabP> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleParams> ;
+            sh:description "Magnetic multipole physics parameters block." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/MagneticMultipoleP> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/RFParams> ;
+            sh:description "RF cavity physics parameters block." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/RFP> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/SolenoidParams> ;
+            sh:description "Solenoid physics parameters block." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/SolenoidP> ],
+        [ sh:description "Kind/type of the profile family or profile instance." ;
+            sh:in ( "Drift" "Marker" "BPM" "Corrector" "Dipole" "Quadrupole" "Solenoid" "RFCavity" "Instrument" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/BendParams> ;
+            sh:description "Dipole/bend physics parameters block." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/BendP> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/ElementNaradRef> ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/narad> ],
+        [ sh:datatype xsd:float ;
+            sh:description "Physical length of the element in meters." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/length> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/BeamlineElement> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/Capability> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A grouping of related signals for a control aspect." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ sh:class sosa:ObservableProperty ;
+            sh:description "Signals within a capability." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/signals> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/Capability> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A reusable family of control profiles sharing common semantics and structure." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+            sh:description "Magnet profile definitions keyed by profile name." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/magnet_type_profiles> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Kind/type of the profile family or profile instance." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+            sh:description "Instrument profile definitions keyed by profile name." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/instrument_type_profiles> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/Capability> ;
+            sh:description "Named shared capabilities reused by profile types in a family." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/GraphProjection> ;
+            sh:description "Optional graph projection metadata attached to a profile family." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/graph_projection> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> ;
+            sh:description "RF cavity profile definitions keyed by profile name." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 6 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/cavity_type_profiles> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/ControlProfileFamily> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Signal binding set scoped to a device type (for example, Quadrupole or BPM)." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> ;
+            sh:description "Signal definitions keyed by signal name within a device type." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/signal_bindings> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/DeviceTypeSignalSet> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "An inline capability declared within a device-type profile, with its own identifier, a semantic class label, a description, and a list of signals. Distinct from the shared capabilities referenced by name; these are profile-local definitions." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for the entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/id> ],
+        [ sh:class sosa:ObservableProperty ;
+            sh:description "Signals within a capability." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/signals> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Semantic class label for a type-specific capability (e.g. QuadrupoleStrengthCapability). Serialized as 'class' in source YAML; renamed here to avoid conflict with reserved keywords." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/capability_class> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/description> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Semantic context referencing shared and type-specific capability names for a beamline element." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability> ;
+            sh:description "Capability class labels (e.g. CorrectorKickCapability) identifying which type-specific capabilities apply to this element. These match the capability_class field of TypeSpecificCapability entries in the profile." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/Capability> ;
+            sh:description "Names of shared capabilities applied to this element, referencing Capability by name." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/shared_capabilities> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/ElementSemantics> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A named EPICS suffix definition for one semantic signal." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Facility-specific EPICS suffix for a semantic signal." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/epics_suffix> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/SignalBinding> .
+
+<https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A device-type profile that reuses shared capabilities and adds specific capabilities." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/description> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name/identifier of the entity." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/name> ],
+        [ sh:class <https://w3id.org/narad_linkml/schema/narad/schema/TypeSpecificCapability> ;
+            sh:description "Type-specific capabilities declared directly in a profile, each with an id, class label, description, and signals." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/type_specific_capabilities> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Kind/type of the profile family or profile instance." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/kind> ],
+        [ sh:datatype xsd:string ;
+            sh:description "Names of shared capabilities inherited by the profile." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path <https://w3id.org/narad_linkml/schema/narad/schema/inherits_shared_capabilities> ] ;
+    sh:targetClass <https://w3id.org/narad_linkml/schema/narad/schema/CapabilityProfile> .
+
